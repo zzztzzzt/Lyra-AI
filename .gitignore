@@ -1,0 +1,37 @@
+# Package
+Manifest.toml
+
+# Julia compiled / cache
+*.ji
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+.julia/
+
+# Local preferences
+LocalPreferences.toml
+JuliaLocalPreferences.toml
+
+# Data & cache ( project specific )
+/data/
+/scratch/
+deps/cache/
+
+# Documentation
+docs/build/
+docs/site/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
