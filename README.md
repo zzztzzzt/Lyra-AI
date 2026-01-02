@@ -29,7 +29,7 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 in project folder, command below
 
-`julia --project=. build_data.jl`
+`julia --project=. scripts/build_data.jl`
 
 if you choose " input all in once ", you can type in below format
 
@@ -45,6 +45,6 @@ if you choose " input one color everytime ", you can type in below format
 
 after the dataset is enough, run training code
 
-`julia --project=. train.jl`
+`julia --project=. scripts/train.jl`
 
-your model will be `trained_color_model.jld2`
+your model will be saved in `models/trained_color_model.jld2`

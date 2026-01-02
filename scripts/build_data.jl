@@ -1,5 +1,5 @@
 using JLD2
-include("ColorOKLab.jl")
+include("../src/lyra_utils/ColorOKLab.jl")
 
 const OKLAB_DIM = 3
 const PALETTE_SIZE = 6
@@ -127,7 +127,7 @@ function prompt_palette(n::Int)
 end
 
 hex_list = prompt_palette(7)
-save_augmented_palette("training_data/color_data.jld2", hex_list)
+save_augmented_palette("../training_data/color_data.jld2", hex_list)
 
 # Example Usage ( Demonstration purposes only. For formal training, please use our GUI or Batch Training )
 #=
@@ -137,7 +137,7 @@ my_first_palette = [
     "#F4F9FF"
 ]
 
-save_augmented_palette("training_data/color_data.jld2", my_first_palette)
+save_augmented_palette("../training_data/color_data.jld2", my_first_palette)
 
 my_full_palette = [
     "#ABE7FF", # main color
@@ -149,5 +149,5 @@ my_full_palette = [
     "#D6EFFF"
 ]
 
-save_augmented_palette("training_data/color_data.jld2", my_full_palette)
+save_augmented_palette("../training_data/color_data.jld2", my_full_palette)
 =#

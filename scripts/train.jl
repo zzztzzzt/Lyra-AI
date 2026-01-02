@@ -6,7 +6,7 @@ const IN_DIM, OUT_DIM = 3, 18
 const HIDDEN, BATCH_SIZE, N_EPOCHS, LR = 64, 16, 300, 1e-3
 
 # 2. Load Data
-@load "training_data/color_data.jld2" X_total Y_total
+@load "../training_data/color_data.jld2" X_total Y_total
 X, Y = Float32.(X_total), Float32.(Y_total)
 
 # 3. Define Model (add LayerNorm to make colors more stable)
@@ -39,5 +39,5 @@ for epoch in 1:N_EPOCHS
 end
 
 # 5. Save Model
-@save "trained_color_model.jld2" tstate
+@save "../models/trained_color_model.jld2" tstate
 println("AI training completed")
