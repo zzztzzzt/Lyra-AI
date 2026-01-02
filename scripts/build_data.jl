@@ -126,8 +126,10 @@ function prompt_palette(n::Int)
     end
 end
 
-hex_list = prompt_palette(7)
-save_augmented_palette("../training_data/color_data.jld2", hex_list)
+if abspath(PROGRAM_FILE) == @__FILE__
+    hex_list = prompt_palette(7)
+    save_augmented_palette("../training_data/color_data.jld2", hex_list)
+end
 
 # Example Usage ( Demonstration purposes only. For formal training, please use our GUI or Batch Training )
 #=
