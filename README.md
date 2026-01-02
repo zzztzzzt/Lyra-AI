@@ -29,36 +29,20 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 in project folder, command below
 
-```shell
-
-julia --project=. build_data.jl
-
-```
+`julia --project=. build_data.jl`
 
 if you choose "input all in once", you can type in below format
 
-```shell
+`#86DDFF #DAF0F9 #F4F9FF #425573 #CCCCCC #8C939F #D6EFFF`
 
-#86DDFF #DAF0F9 #F4F9FF #425573 #CCCCCC #8C939F #D6EFFF
-
-```
 or
-```shell
 
-"#86DDFF", "#DAF0F9", "#F4F9FF", "#425573", "#CCCCCC", "#8C939F", "#D6EFFF"
-
-```
+`"#86DDFF", "#DAF0F9", "#F4F9FF", "#425573", "#CCCCCC", "#8C939F", "#D6EFFF"`
 
 if you choose "input one color everytime", you can type in below format
 
-```shell
+`#86DDFF`
 
-#86DDFF
-
-```
 or
-```shell
 
-"#86DDFF"
-
-```
+`"#86DDFF"`
