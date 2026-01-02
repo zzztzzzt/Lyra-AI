@@ -21,17 +21,17 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 [ wip ]
 
-### Option 2. Batch Training
+### Option 2. Batch Training ( Recommended )
 
 [ wip ]
 
-### Option 3. CLI / Shell command ( Demonstration purposes only. For formal training, please use our GUI or Batch Training )
+### Option 3. CLI / Shell command
 
 in project folder, command below
 
 `julia --project=. build_data.jl`
 
-if you choose "input all in once", you can type in below format
+if you choose " input all in once ", you can type in below format
 
 `#86DDFF #DAF0F9 #F4F9FF #425573 #CCCCCC #8C939F #D6EFFF`
 
@@ -39,10 +39,12 @@ or
 
 `"#86DDFF", "#DAF0F9", "#F4F9FF", "#425573", "#CCCCCC", "#8C939F", "#D6EFFF"`
 
-if you choose "input one color everytime", you can type in below format
+if you choose " input one color everytime ", you can type in below format
 
-`#86DDFF`
+`#86DDFF` or `"#86DDFF"`
 
-or
+after the dataset is enough, run training code
 
-`"#86DDFF"`
+`julia --project=. train.jl`
+
+your model will be `trained_color_model.jld2`
