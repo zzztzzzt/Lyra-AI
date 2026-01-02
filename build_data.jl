@@ -100,7 +100,7 @@ function prompt_palette(n::Int)
 
             hexes = split(line, r"[,\s]+"; keepempty=false)
             hexes = String.(hexes) # SubString → String
-            hexes = replace.(hexes, "\"" => "")
+            hexes = replace.(hexes, "\"" => "", "'" => "")
 
             if length(hexes) != n
                 println("Error: You must provide exactly $n hex colors, but got $(length(hexes)).")
@@ -114,7 +114,9 @@ function prompt_palette(n::Int)
             hexes = String[]
             for i in 1:n
                 print("please enter $i / $n Hex color: ")
-                push!(hexes, strip(readline()))
+                input = strip(readline())
+                clean_hex = replace(input, ('"' => ""), ("'" => ""))
+                push!(hexes, clean_hex)
             end
             return hexes
 
@@ -127,7 +129,18 @@ end
 hex_list = prompt_palette(7)
 save_augmented_palette("training_data/color_data.jld2", hex_list)
 
-# Example Usage
+# Example Usage ( CLI / Shell )
+#=
+input all in once :
+input : #34495E #E67E22 #1ABC9C #F1C40F #ECF0F1 #34495E #34495E
+or : "#34495E", "#E67E22", "#1ABC9C", "#F1C40F", "#ECF0F1", "#34495E", "#34495E"
+
+input one color every time : 
+input : #34495E
+or : "#34495E"
+=#
+
+# Example Usage ( in-code )
 #=
 my_first_palette = [
     "#ABE7FF", # main color
