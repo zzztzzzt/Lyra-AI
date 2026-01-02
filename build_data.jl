@@ -87,6 +87,45 @@ function save_augmented_palette(
     println("total samples: ", size(X_total, 2))
 end
 
+function prompt_palette(n::Int)
+    while true
+        println("Paste all hex colors at once? (y/n)")
+        print("> ")
+        mode = lowercase(strip(readline()))
+
+        if mode == "y"
+            println("Paste exactly $n hex colors (space or comma separated):")
+            print("> ")
+            line = readline()
+
+            hexes = split(line, r"[,\s]+"; keepempty=false)
+            hexes = String.(hexes) # SubString → String
+            hexes = replace.(hexes, "\"" => "")
+
+            if length(hexes) != n
+                println("Error: You must provide exactly $n hex colors, but got $(length(hexes)).")
+                println("Please try again.\n")
+                continue
+            end
+
+            return hexes
+
+        elseif mode == "n"
+            hexes = String[]
+            for i in 1:n
+                print("please enter $i / $n Hex color: ")
+                push!(hexes, strip(readline()))
+            end
+            return hexes
+
+        else
+            println("Invalid input. Please enter 'y' or 'n'.\n")
+        end
+    end
+end
+
+hex_list = prompt_palette(7)
+save_augmented_palette("training_data/color_data.jld2", hex_list)
 
 # Example Usage
 #=
@@ -96,7 +135,7 @@ my_first_palette = [
     "#F4F9FF"
 ]
 
-save_augmented_palette("color_data.jld2", my_first_palette)
+save_augmented_palette("training_data/color_data.jld2", my_first_palette)
 
 my_full_palette = [
     "#ABE7FF", # main color
@@ -108,5 +147,5 @@ my_full_palette = [
     "#D6EFFF"
 ]
 
-save_augmented_palette("color_data.jld2", my_full_palette)
+save_augmented_palette("training_data/color_data.jld2", my_full_palette)
 =#

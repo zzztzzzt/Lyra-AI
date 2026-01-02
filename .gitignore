@@ -16,6 +16,7 @@ JuliaLocalPreferences.toml
 
 # Data & cache ( project specific )
 /data/
+/training_data/
 /scratch/
 deps/cache/
 
