@@ -129,18 +129,7 @@ end
 hex_list = prompt_palette(7)
 save_augmented_palette("training_data/color_data.jld2", hex_list)
 
-# Example Usage ( CLI / Shell )
-#=
-input all in once :
-input : #34495E #E67E22 #1ABC9C #F1C40F #ECF0F1 #34495E #34495E
-or : "#34495E", "#E67E22", "#1ABC9C", "#F1C40F", "#ECF0F1", "#34495E", "#34495E"
-
-input one color every time : 
-input : #34495E
-or : "#34495E"
-=#
-
-# Example Usage ( in-code )
+# Example Usage ( Demonstration purposes only. For formal training, please use our GUI or Batch Training )
 #=
 my_first_palette = [
     "#ABE7FF", # main color
