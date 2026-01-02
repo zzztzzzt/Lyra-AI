@@ -1,6 +1,6 @@
 # Lyra
 <br>
-<img src="https://github.com/zzztzzzt/Lyra-AI/blob/main/logo/logo.png" alt="lyra-logo" style="width: 300px; min-height: 187px;" />
+<img src="https://github.com/zzztzzzt/Lyra-AI/blob/main/logo/favicon.png" alt="lyra-logo" style="width: 300px; min-height: 187px;" />
 
 ### Lyra is an AI for orchestrating colors/gradients in 3D environments.
 
