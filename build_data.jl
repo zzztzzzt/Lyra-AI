@@ -1,5 +1,4 @@
-using BSON: @save, @load
-
+using JLD2
 include("ColorOKLab.jl")
 
 const OKLAB_DIM = 3
@@ -62,14 +61,11 @@ function save_augmented_palette(
     l_range = L_SHIFT_RANGE
 )
     # load the dataset from the file if it exists, otherwise initialize an empty dataset
-    X_total, Y_total = if isfile(filename)
-        @load filename X Y
-        X, Y
+    if isfile(filename)
+        @load filename X_total Y_total
     else
-        (
-            Matrix{Float32}(undef, OKLAB_DIM, 0),
-            Matrix{Float32}(undef, OKLAB_DIM * palette_size, 0)
-        )
+        X_total = Matrix{Float32}(undef, OKLAB_DIM, 0)
+        Y_total = Matrix{Float32}(undef, OKLAB_DIM * palette_size, 0)
     end
 
     # Hex -> OKLab
@@ -100,7 +96,7 @@ my_first_palette = [
     "#F4F9FF"
 ]
 
-save_augmented_palette("color_data.bson", my_first_palette)
+save_augmented_palette("color_data.jld2", my_first_palette)
 
 my_full_palette = [
     "#ABE7FF", # main color
@@ -112,5 +108,5 @@ my_full_palette = [
     "#D6EFFF"
 ]
 
-save_augmented_palette("color_data.bson", my_full_palette)
+save_augmented_palette("color_data.jld2", my_full_palette)
 =#

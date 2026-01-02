@@ -1,12 +1,12 @@
-using Lux, Random, Optimisers, Statistics, Zygote, BSON
-using BSON: @load, @save
+using Lux, Random, Optimisers, Statistics, Zygote
+using JLD2
 
 # 1. Hyperparameters
 const IN_DIM, OUT_DIM = 3, 18
 const HIDDEN, BATCH_SIZE, N_EPOCHS, LR = 64, 16, 300, 1e-3
 
 # 2. Load Data
-@load "color_data.bson" X Y
+@load "color_data.jld2" X Y
 X, Y = Float32.(X), Float32.(Y)
 
 # 3. Define Model (add LayerNorm to make colors more stable)
@@ -36,5 +36,5 @@ for epoch in 1:N_EPOCHS
 end
 
 # 5. Save Model
-@save "trained_color_model.bson" tstate
+@save "trained_color_model.jld2" tstate
 println("AI training completed")
