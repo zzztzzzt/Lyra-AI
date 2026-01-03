@@ -19,7 +19,7 @@ function hex_to_oklab_vec(hex::String)
     # Step B: Linear RGB -> LMS space (using OKLAB transformation matrix M1)
     M1 = [0.4122214708 0.5363325363 0.0514459929;
           0.2119034982 0.6806995451 0.1073969566;
-          0.0883024619 0.2817188976 0.6299786405]
+          0.0883024619 0.2817188376 0.6299787005]
     lms = M1 * l_rgb
     
     # Step C: Non-linear processing (Cube root)
@@ -27,7 +27,7 @@ function hex_to_oklab_vec(hex::String)
     lms_prime = sign.(lms) .* abs.(lms).^(1/3)
 
     # Step D: LMS -> OKLAB (using transformation matrix M2)
-    M2 = [0.2104542553  0.7936177850 -0.0040720403;
+    M2 = [0.2104542553  0.7936177850 -0.0040720468;
           1.9779984951 -2.4285922050  0.4505937099;
           0.0259040371  0.7827717662 -0.8086757660]
     lab = M2 * lms_prime
@@ -48,7 +48,7 @@ function oklab_to_hex(lab::AbstractVector)
     # M1 inverse matrix (the inverse of Linear RGB -> LMS)
     M1_inv = [4.0767416621 -3.3077115913 0.2309699292;
              -1.2684380046 2.6097574011 -0.3413193965;
-             -0.0041960863 -0.7034195314 1.7076147010]
+             -0.0041960863 -0.7034186147 1.7076147010]
     l_rgb = M1_inv * lms
     
     # Linear -> sRGB (Gamma correction)
