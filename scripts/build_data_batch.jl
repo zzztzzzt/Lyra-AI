@@ -11,25 +11,32 @@ function process_json_palettes(json_file::String, output_file::String)
         palettes = data["palettes"]
         
         for (idx, palette) in enumerate(palettes)
+            # For Debugging
+            #println("Palette $idx type = ", typeof(palette))
+            #println("Palette $idx content = ", palette)
+
             # support 2 JSON format
             colors = if palette isa Vector
                 palette # simple array format ( for example see bottom of the code )
-            elseif palette isa Dict && haskey(palette, "colors")
+            elseif (palette isa Dict{String,Any} || palette isa JSON.Object{String,Any}) && haskey(palette, "colors")
                 palette["colors"] # name-included format ( for example see bottom of the code )
             else
                 println("Warning: Skipping invalid palette at index $idx")
                 continue
             end
+
+            # Forced change to Vector{String}
+            colors_str = String[string(c) for c in colors]
             
             # make sure at least one primary color
-            if length(colors) < 1
+            if length(colors_str) < 1
                 println("Warning: Palette $idx has no colors, skipping")
                 continue
             end
             
             # process each color palette
             try
-                save_augmented_palette(output_file, colors)
+                save_augmented_palette(output_file, colors_str)
                 total_processed += 1
                 
                 if palette isa Dict && haskey(palette, "name")
@@ -45,10 +52,8 @@ function process_json_palettes(json_file::String, output_file::String)
         error("JSON must contain a 'palettes' key")
     end
     
-    println("\n" * "="^50)
     println("Batch processing completed!")
     println("Total palettes processed: $total_processed")
-    println("="^50)
 end
 
 # Batch processing
@@ -60,7 +65,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
     end
     
     json_file = ARGS[1]
-    output_file = length(ARGS) >= 2 ? ARGS[2] : "../training_data/color_data.jld2"
+    output_file = length(ARGS) >= 2 ? ARGS[2] : "training_data/color_data.jld2"
     
     if !isfile(json_file)
         println("Error: JSON file '$json_file' not found")
@@ -75,8 +80,8 @@ Example JSON
 
 {
   "palettes": [
-    ["#86DDFF", "#DAF0F9", "#F4F9FF", "#425573", "#CCCCCC", "#8C939F", "#D6EFFF"],
-    ["#FF6B6B", "#FFE66D", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7", "#DFE6E9"]
+    ["#86FFB1", "#ADF2D1", "#006D1D", "#E0FFD7", "#79FF94", "#3FFFBF", "#BDFFD4"],
+    ["#FFED86", "#F9F3DA", "#FFFDF4", "#F9FF55", "#E0E0E0", "#FFF1DA", "#FFFCD6"]
   ]
 }
 
@@ -85,12 +90,12 @@ OR Details
 {
   "palettes": [
     {
-      "name": "Ocean Blue",
-      "colors": ["#86DDFF", "#DAF0F9", "#F4F9FF", "#425573", "#CCCCCC", "#8C939F", "#D6EFFF"]
+      "name": "light green",
+      "colors": ["#86FFB1", "#ADF2D1", "#006D1D", "#E0FFD7", "#79FF94", "#3FFFBF", "#BDFFD4"]
     },
     {
-      "name": "Sunset Warm",
-      "colors": ["#FF6B6B", "#FFE66D", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7", "#DFE6E9"]
+      "name": "yellow",
+      "colors": ["#FFED86", "#F9F3DA", "#FFFDF4", "#F9FF55", "#E0E0E0", "#FFF1DA", "#FFFCD6"]
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+    "palettes": [
+        {
+            "name": "light green",
+            "colors": ["#86FFB1", "#ADF2D1", "#006D1D", "#E0FFD7", "#79FF94", "#3FFFBF", "#BDFFD4"]
+        },
+        {
+            "name": "yellow",
+            "colors": ["#FFED86", "#F9F3DA", "#FFFDF4", "#F9FF55", "#E0E0E0", "#FFF1DA", "#FFFCD6"]
+        }
+    ]
+}

@@ -60,6 +60,13 @@ function save_augmented_palette(
     aug_steps::Int = AUGMENT_STEPS,
     l_range = L_SHIFT_RANGE
 )
+    # Ensure the directory exists
+    dir = dirname(filename)
+    if !isempty(dir) && !isdir(dir)
+        mkpath(dir)
+        println("Created directory: $dir")
+    end
+
     # load the dataset from the file if it exists, otherwise initialize an empty dataset
     if isfile(filename)
         @load filename X_total Y_total
@@ -84,6 +91,7 @@ function save_augmented_palette(
     @save filename X_total Y_total
 
     println("palette augmentation completed")
+    println("Saved to: $filename")
     println("total samples: ", size(X_total, 2))
 end
 
@@ -128,7 +136,7 @@ end
 
 if abspath(PROGRAM_FILE) == @__FILE__
     hex_list = prompt_palette(7)
-    save_augmented_palette("../training_data/color_data.jld2", hex_list)
+    save_augmented_palette("training_data/color_data.jld2", hex_list)
 end
 
 # Example Usage ( Demonstration purposes only. For formal training, please use our GUI or Batch Training )

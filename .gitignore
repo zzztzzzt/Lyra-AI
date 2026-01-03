@@ -14,9 +14,12 @@ Manifest.toml
 LocalPreferences.toml
 JuliaLocalPreferences.toml
 
+# Training Results & Datasets
+/training_data/
+/models/
+
 # Data & cache ( project specific )
 /data/
-/training_data/
 /scratch/
 deps/cache/
 
