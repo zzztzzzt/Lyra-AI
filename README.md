@@ -25,7 +25,36 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 ### Option 2. Batch Training ( Recommended )
 
-[ wip ]
+modify `training_data.json` at project root
+
+JSON fromat example is at below
+
+```json
+
+{
+    "palettes": [
+        {
+            "name": "light green",
+            "colors": ["#86FFB1", "#ADF2D1", "#006D1D", "#E0FFD7", "#79FF94", "#3FFFBF", "#BDFFD4"]
+        },
+        {
+            "name": "yellow",
+            "colors": ["#FFED86", "#F9F3DA", "#FFFDF4", "#F9FF55", "#E0E0E0", "#FFF1DA", "#FFFCD6"]
+        }
+    ]
+}
+
+```
+
+in project folder, command below
+
+`julia --project=. scripts/build_data_batch.jl training_data.json`
+
+after the dataset is enough, run training code
+
+`julia --project=. scripts/train.jl`
+
+your model will be saved in `models/trained_color_model.jld2`
 
 ### Option 3. CLI / Shell command
 
