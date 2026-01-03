@@ -81,4 +81,4 @@ run `julia --project=. scripts/predict.jl` to test
 ## Version History ( Training Data Showcase )
 
 #### Lyra 1.0 (2026.01)
-![1.0showcase](https://github.com/zzztzzzt/Amol-JS/blob/main/training_data_showcase/Lyra1.0.png)
+![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0.png)
