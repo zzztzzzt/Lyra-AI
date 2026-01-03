@@ -33,14 +33,8 @@ JSON fromat example is at below
 
 {
     "palettes": [
-        {
-            "name": "light green",
-            "colors": ["#86FFB1", "#ADF2D1", "#006D1D", "#E0FFD7", "#79FF94", "#3FFFBF", "#BDFFD4"]
-        },
-        {
-            "name": "yellow",
-            "colors": ["#FFED86", "#F9F3DA", "#FFFDF4", "#F9FF55", "#E0E0E0", "#FFF1DA", "#FFFCD6"]
-        }
+        ["85FF80", "00C073", "CFFFBB", "8EFFA9", "95FFEC", "399A02", "68FFE1"],
+        ["FF8282", "FF6363", "FFCB79", "FF5356", "FFE044", "FF655A", "FFE3E8"]
     ]
 }
 
@@ -64,18 +58,27 @@ in project folder, command below
 
 if you choose " input all in once ", you can type in below format
 
-`#86DDFF #DAF0F9 #F4F9FF #425573 #CCCCCC #8C939F #D6EFFF`
+`85FF80 00C073 CFFFBB 8EFFA9 95FFEC 399A02 68FFE1`
 
 or
 
-`"#86DDFF", "#DAF0F9", "#F4F9FF", "#425573", "#CCCCCC", "#8C939F", "#D6EFFF"`
+`"85FF80", "00C073", "CFFFBB", "8EFFA9", "95FFEC", "399A02", "68FFE1"`
 
 if you choose " input one color everytime ", you can type in below format
 
-`#86DDFF` or `"#86DDFF"`
+`85FF80` or `"85FF80"`
 
 after the dataset is enough, run training code
 
 `julia --project=. scripts/train.jl`
 
 your model will be saved in `models/trained_color_model.jld2`
+
+### Final Step : Predict
+
+run `julia --project=. scripts/predict.jl` to test
+
+## Version History ( Training Data Showcase )
+
+#### Lyra 1.0 (2026.01)
+![1.0showcase](https://github.com/zzztzzzt/Amol-JS/blob/main/training_data_showcase/Lyra1.0.png)
