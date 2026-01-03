@@ -4,6 +4,9 @@ function srgb_to_linear(c)
     return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055)^2.4
 end
 
+# Auxiliary: Decimal to Hexadecimal string conversion
+hex(x, pad) = lpad(string(x, base=16), pad, '0')
+
 function hex_to_oklab_vec(hex::String)
     hex = replace(hex, "#" => "")
     r = parse(Int, hex[1:2], base=16) / 255.0
@@ -29,4 +32,33 @@ function hex_to_oklab_vec(hex::String)
           0.0259040371  0.7827717662 -0.8086757660]
     lab = M2 * lms_prime
     return Float32.(lab) # return [L, a, b]
+end
+
+# OKLab -> Linear RGB -> sRGB -> Hex
+function oklab_to_hex(lab::AbstractVector)
+    L, a, b = lab[1], lab[2], lab[3]
+    
+    # M2 inverse matrix (the inverse of LMS -> OKLab)
+    M2_inv = [1.0 0.3963377774 0.2158037573;
+              1.0 -0.1055613458 -0.0638541728;
+              1.0 -0.0894841775 -1.2914855480]
+    lms_prime = M2_inv * [L, a, b]
+    lms = lms_prime.^3 # inverse operation of cube root
+    
+    # M1 inverse matrix (the inverse of Linear RGB -> LMS)
+    M1_inv = [4.0767416621 -3.3077115913 0.2309699292;
+             -1.2684380046 2.6097574011 -0.3413193965;
+             -0.0041960863 -0.7034195314 1.7076147010]
+    l_rgb = M1_inv * lms
+    
+    # Linear -> sRGB (Gamma correction)
+    function linear_to_srgb(c)
+        c = clamp(c, 0.0, 1.0)
+        return c <= 0.0031308 ? 12.92 * c : 1.055 * (c^(1/2.4)) - 0.055
+    end
+    rgb = linear_to_srgb.(l_rgb)
+    
+    # Convert to Hex string
+    r, g, b = Int.(round.(rgb .* 255))
+    return "#" * uppercase(hex(r, 2) * hex(g, 2) * hex(b, 2))
 end
