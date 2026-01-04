@@ -7,7 +7,9 @@ const PALETTE_SIZE = 6
 const AUGMENT_STEPS = 10
 
 const CHROMA_SCALE_RANGE = (0.9f0, 1.1f0)
-const L_SHIFT_RANGE = (-0.15f0, 0.15f0)
+const L_SHIFT_RANGE = (-0.10f0, 0.10f0)
+const L_NOISE_STD = 0.01f0
+const AB_NOISE_STD = 0.005f0
 
 # 1. Tool Functions
 
@@ -29,7 +31,7 @@ end
 # 2. Primary API
 
 #=
-change Hex to OKLab, and save the augmented data to a BSON dataset
+change Hex to OKLab, and save the augmented data to a JLD2 dataset
 
 Dataset format:
 - X : 3 × N (main color OKLab)
@@ -71,8 +73,17 @@ function save_augmented_palette(
         length=aug_steps
     )
         aug_x, aug_y = augment_sample_chroma(main_v, others_v, Float32(scale))
-        X_total = hcat(X_total, aug_x)
-        Y_total = hcat(Y_total, aug_y)
+        
+        # Inject random noise so that each sample has slight variations
+        # Process the main color (X)
+        aug_x_noisy = apply_subtle_noise(aug_x, l_std = L_NOISE_STD, ab_std = AB_NOISE_STD)
+        
+        # Process the palette (Y) - apply independent small perturbations to each color
+        # aug_y is 18x1, so it needs to be split, processed, and then concatenated
+        aug_y_noisy = vcat([apply_subtle_noise(aug_y[i:i+2], l_std = L_NOISE_STD, ab_std = AB_NOISE_STD) for i in 1:3:length(aug_y)]...)
+
+        X_total = hcat(X_total, aug_x_noisy)
+        Y_total = hcat(Y_total, aug_y_noisy)
     end
 
     # Brightness / Lightness augmentation

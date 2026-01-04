@@ -41,3 +41,12 @@ function augment_sample_chroma(
 
     return aug_x, aug_y
 end
+
+function apply_subtle_noise(vec::Vector{Float32}; l_std=0.01f0, ab_std=0.005f0)
+    noise = [
+        randn(Float32) * l_std, # slight adjustment to lightness
+        randn(Float32) * ab_std, # slight adjustment to a channel
+        randn(Float32) * ab_std # slight adjustment to b channel
+    ]
+    return vec .+ noise
+end
