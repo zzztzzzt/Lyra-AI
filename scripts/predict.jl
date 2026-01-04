@@ -23,4 +23,4 @@ function Lyra_generate_palette(input_hex::String)
 end
 
 # Test
-Lyra_generate_palette("#08C508")
+Lyra_generate_palette("#FFB8E3")

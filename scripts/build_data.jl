@@ -1,10 +1,13 @@
 using JLD2
 include("../src/lyra_utils/ColorOKLab.jl")
+include("../src/lyra_utils/PaletteAugment.jl")
 
 const OKLAB_DIM = 3
 const PALETTE_SIZE = 6
 const AUGMENT_STEPS = 10
-const L_SHIFT_RANGE = (-0.1f0, 0.1f0)
+
+const CHROMA_SCALE_RANGE = (0.9f0, 1.1f0)
+#const L_SHIFT_RANGE = (-0.1f0, 0.1f0)
 
 # 1. Tool Functions
 
@@ -23,27 +26,6 @@ function normalize_palette!(
     return others_v
 end
 
-# generate an augmentation sample based on the brightness offset.
-function augment_sample(
-    main_v::Vector{Float32},
-    others_v::Vector{Vector{Float32}},
-    l_shift::Float32
-)
-    # main color
-    aug_x = copy(main_v)
-    aug_x[1] = clamp(aug_x[1] + l_shift, 0.0f0, 1.0f0)
-
-    # other colors
-    aug_y = Float32[]
-    for v in others_v
-        v_new = copy(v)
-        v_new[1] = clamp(v_new[1] + l_shift, 0.0f0, 1.0f0)
-        append!(aug_y, v_new)
-    end
-
-    return aug_x, aug_y
-end
-
 # 2. Primary API
 
 #=
@@ -58,7 +40,7 @@ function save_augmented_palette(
     hex_list::Vector{<:AbstractString};
     palette_size::Int = PALETTE_SIZE,
     aug_steps::Int = AUGMENT_STEPS,
-    l_range = L_SHIFT_RANGE
+    chroma_range = CHROMA_SCALE_RANGE
 )
     # Ensure the directory exists
     dir = dirname(filename)
@@ -76,14 +58,18 @@ function save_augmented_palette(
     end
 
     # Hex -> OKLab
-    main_v   = hex_to_oklab_vec(hex_list[1])
+    main_v = hex_to_oklab_vec(hex_list[1])
     others_v = [hex_to_oklab_vec(h) for h in hex_list[2:end]]
 
     normalize_palette!(others_v, main_v, palette_size)
 
     # data augmentation
-    for l_shift in range(l_range[1], l_range[2], length=aug_steps)
-        aug_x, aug_y = augment_sample(main_v, others_v, Float32(l_shift))
+    for scale in range(
+        chroma_range[1],
+        chroma_range[2],
+        length=aug_steps
+    )
+        aug_x, aug_y = augment_sample_chroma(main_v, others_v, Float32(scale))
         X_total = hcat(X_total, aug_x)
         Y_total = hcat(Y_total, aug_y)
     end
