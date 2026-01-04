@@ -7,7 +7,7 @@ const PALETTE_SIZE = 6
 const AUGMENT_STEPS = 10
 
 const CHROMA_SCALE_RANGE = (0.9f0, 1.1f0)
-#const L_SHIFT_RANGE = (-0.1f0, 0.1f0)
+const L_SHIFT_RANGE = (-0.15f0, 0.15f0)
 
 # 1. Tool Functions
 
@@ -40,7 +40,8 @@ function save_augmented_palette(
     hex_list::Vector{<:AbstractString};
     palette_size::Int = PALETTE_SIZE,
     aug_steps::Int = AUGMENT_STEPS,
-    chroma_range = CHROMA_SCALE_RANGE
+    chroma_range = CHROMA_SCALE_RANGE,
+    l_shift_range = L_SHIFT_RANGE
 )
     # Ensure the directory exists
     dir = dirname(filename)
@@ -63,13 +64,24 @@ function save_augmented_palette(
 
     normalize_palette!(others_v, main_v, palette_size)
 
-    # data augmentation
+    # Chroma augmentation
     for scale in range(
         chroma_range[1],
         chroma_range[2],
         length=aug_steps
     )
         aug_x, aug_y = augment_sample_chroma(main_v, others_v, Float32(scale))
+        X_total = hcat(X_total, aug_x)
+        Y_total = hcat(Y_total, aug_y)
+    end
+
+    # Brightness / Lightness augmentation
+    for shift in range(
+        l_shift_range[1],
+        l_shift_range[2],
+        length=aug_steps
+    )
+        aug_x, aug_y = augment_sample_brightness(main_v, others_v, Float32(shift))
         X_total = hcat(X_total, aug_x)
         Y_total = hcat(Y_total, aug_y)
     end

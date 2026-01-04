@@ -43,7 +43,7 @@ function oklab_to_hex(lab::AbstractVector)
               1.0 -0.1055613458 -0.0638541728;
               1.0 -0.0894841775 -1.2914855480]
     lms_prime = M2_inv * [L, a, b]
-    lms = lms_prime.^3 # inverse operation of cube root
+    lms = sign.(lms_prime) .* abs.(lms_prime).^3 # inverse operation of cube root
     
     # M1 inverse matrix (the inverse of Linear RGB -> LMS)
     M1_inv = [4.0767416621 -3.3077115913 0.2309699292;
