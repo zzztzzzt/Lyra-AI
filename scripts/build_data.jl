@@ -7,9 +7,9 @@ const PALETTE_SIZE = 6
 const AUGMENT_STEPS = 10
 
 const CHROMA_SCALE_RANGE = (0.9f0, 1.1f0)
-const L_SHIFT_RANGE = (-0.10f0, 0.10f0)
+const L_SHIFT_RANGE = (-0.15f0, 0.15f0)
 const L_NOISE_STD = 0.01f0
-const AB_NOISE_STD = 0.005f0
+const AB_NOISE_STD = 0.002f0
 
 # 1. Tool Functions
 
