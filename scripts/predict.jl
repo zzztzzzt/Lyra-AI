@@ -9,9 +9,12 @@ function Lyra_generate_palette(input_hex::String)
     x = hex_to_oklab_vec(input_hex)
     x_matrix = reshape(x, :, 1) # (3, 1)
     
-    # AI Predict
-    y_pred, _ = Lux.apply(tstate.model, x_matrix, tstate.parameters, tstate.states)
-    
+    # AI Predict (output is OFFSET)
+    y_offset, _ = Lux.apply(tstate.model, x_matrix, tstate.parameters, tstate.states)
+
+    # ADD BACK main color
+    y_pred = y_offset .+ repeat(x_matrix, 9)
+
     # broken down into 9 colors (3 sets of gradients × 3 colors)
     colors_vec = reshape(vec(y_pred), 3, 9)
     
@@ -23,4 +26,4 @@ function Lyra_generate_palette(input_hex::String)
 end
 
 # Test
-Lyra_generate_palette("#CA38FF")
+Lyra_generate_palette("#17BA11")

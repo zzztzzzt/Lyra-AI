@@ -9,6 +9,18 @@ const HIDDEN, BATCH_SIZE, N_EPOCHS, LR = 64, 16, 300, 1e-3
 @load "training_data/color_data.jld2" X_total Y_total
 X, Y = Float32.(X_total), Float32.(Y_total)
 
+# convert absolute colors to relative offsets
+Y_offset = similar(Y)
+
+for i in 1:size(X, 2)
+    main = X[:, i] # 3
+    main_repeat = repeat(main, 9) # 27
+    Y_offset[:, i] = Y[:, i] .- main_repeat
+end
+
+# Train by replacing the original Y with the offset, so AI will learn the offset relative to the main color, not the absolute color
+Y = Y_offset
+
 println("⭐ ||||||  Dataset Info  |||||| ⭐")
 println("Input shape (X): $(size(X))")
 println("Output shape (Y): $(size(Y))")
@@ -39,7 +51,7 @@ for epoch in 1:N_EPOCHS
 
     grads, loss, stats, tstate = Lux.Training.single_train_step!(
         AutoZygote(), 
-        (m, p, s, d) -> (mean(abs2, Lux.apply(m, d[1], p, s)[1] .- d[2]), Lux.apply(m, d[1], p, s)[2], ()),
+        (m, p, s, d) -> (mean(abs, Lux.apply(m, d[1], p, s)[1] .- d[2]), Lux.apply(m, d[1], p, s)[2], ()),
         (X, Y), tstate
     )
     
