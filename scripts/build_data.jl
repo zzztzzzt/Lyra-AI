@@ -4,12 +4,10 @@ include("../src/lyra_utils/PaletteAugment.jl")
 
 const OKLAB_DIM = 3
 const PALETTE_SIZE = 6
-const AUGMENT_STEPS = 10
+const AUGMENT_STEPS = 5
 
-const CHROMA_SCALE_RANGE = (0.9f0, 1.1f0)
-const L_SHIFT_RANGE = (-0.15f0, 0.15f0)
-const L_NOISE_STD = 0.01f0
-const AB_NOISE_STD = 0.002f0
+const L_DARK_THRESHOLD   = 0.50f0
+const L_BRIGHT_THRESHOLD = 0.80f0
 
 # 1. Tool Functions
 
@@ -42,8 +40,7 @@ function save_augmented_palette(
     hex_list::Vector{<:AbstractString};
     palette_size::Int = PALETTE_SIZE,
     aug_steps::Int = AUGMENT_STEPS,
-    chroma_range = CHROMA_SCALE_RANGE,
-    l_shift_range = L_SHIFT_RANGE
+    l_scale_range = L_SCALE_RANGE
 )
     # Ensure the directory exists
     dir = dirname(filename)
@@ -66,33 +63,19 @@ function save_augmented_palette(
 
     normalize_palette!(others_v, main_v, palette_size)
 
-    # Chroma augmentation
-    for scale in range(
-        chroma_range[1],
-        chroma_range[2],
-        length=aug_steps
-    )
-        aug_x, aug_y = augment_sample_chroma(main_v, others_v, Float32(scale))
-        
-        # Inject random noise so that each sample has slight variations
-        # Process the main color (X)
-        aug_x_noisy = apply_subtle_noise(aug_x, l_std = L_NOISE_STD, ab_std = AB_NOISE_STD)
-        
-        # Process the palette (Y) - apply independent small perturbations to each color
-        # aug_y is 18x1, so it needs to be split, processed, and then concatenated
-        aug_y_noisy = vcat([apply_subtle_noise(aug_y[i:i+2], l_std = L_NOISE_STD, ab_std = AB_NOISE_STD) for i in 1:3:length(aug_y)]...)
+    main_lightness = main_v[1] # L value in OKLab
 
-        X_total = hcat(X_total, aug_x_noisy)
-        Y_total = hcat(Y_total, aug_y_noisy)
+    l_scale_range = if main_lightness < L_DARK_THRESHOLD
+        (1.00f0, 1.15f0) # only brighten it
+    elseif main_lightness > L_BRIGHT_THRESHOLD
+        (0.85f0, 1.00f0) # only darken it
+    else
+        (0.85f0, 1.15f0) # normal range
     end
 
     # Brightness / Lightness augmentation
-    for shift in range(
-        l_shift_range[1],
-        l_shift_range[2],
-        length=aug_steps
-    )
-        aug_x, aug_y = augment_sample_brightness(main_v, others_v, Float32(shift))
+    for scale in range(l_scale_range[1], l_scale_range[2], length=aug_steps)
+        aug_x, aug_y = augment_sample_brightness(main_v, others_v, Float32(scale))
         X_total = hcat(X_total, aug_x)
         Y_total = hcat(Y_total, aug_y)
     end
