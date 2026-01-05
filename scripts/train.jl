@@ -51,6 +51,7 @@ for epoch in 1:N_EPOCHS
 
     grads, loss, stats, tstate = Lux.Training.single_train_step!(
         AutoZygote(), 
+        # Switch MSE to MAE for more robust regression loss
         (m, p, s, d) -> (mean(abs, Lux.apply(m, d[1], p, s)[1] .- d[2]), Lux.apply(m, d[1], p, s)[2], ()),
         (X, Y), tstate
     )
