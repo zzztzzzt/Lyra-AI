@@ -16,7 +16,8 @@ JuliaLocalPreferences.toml
 
 # Training Results & Datasets
 /training_data/
-/models/
+/models/*
+!/models/Lyra1.0.jld2
 
 # Data & cache ( project specific )
 /data/
