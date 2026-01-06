@@ -4,3 +4,7 @@ public/* linguist-vendored
 * text=auto
 *.sh text eol=lf
 *.conf text eol=lf
+
+public/js/ansi_up.js linguist-vendored
+public/js/prism.js linguist-vendored
+public/js/static.js linguist-vendored
