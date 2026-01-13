@@ -84,4 +84,4 @@ run `julia --project=. scripts/predict.jl` to test
 ![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0_predictions.jpg)
 
 #### Lyra 1.0 (2026.01) - Datasets
-![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0_dataset_structure.jpg)
+![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0_dataset_structure.webp)
