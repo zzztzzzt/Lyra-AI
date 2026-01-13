@@ -78,7 +78,7 @@ your model will be saved in `models/trained_color_model.jld2`
 
 run `julia --project=. scripts/predict.jl` to test
 
-## Version History ( Datasets & Predictions )
+## Version History ( Training Process & Predictions )
 
 #### Lyra 1.0 (2026.01) - Predictions
 ![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0_predictions.jpg)
