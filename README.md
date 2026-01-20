@@ -6,6 +6,14 @@
 
 IMPORTANT : This project is still in the development and testing stages, licensing terms may be updated in the future. Please don't do any commercial usage currently.
 
+![Julia](https://img.shields.io/badge/Julia-9558B2?style=for-the-badge&logo=julia&logoColor=white)
+![LuxJl](https://img.shields.io/badge/Lux.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)
+![GenieJl](https://img.shields.io/badge/Genie.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-9135FF?style=for-the-badge&logo=vite&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-00FF74?style=for-the-badge&logo=vitest&logoColor=white)
+![UnoCSS](https://img.shields.io/badge/Uno_CSS-333333?style=for-the-badge&logo=unocss&logoColor=white)
+
 Lyra uses Lux.jl for deep learning. Lux.jl licensed under the MIT License.  
 Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://github.com/LuxDL/Lux.jl/blob/main/LICENSE)
 
