@@ -12,6 +12,7 @@ interface ControlRowProps {
     step: number;
     onChange: (v: string) => void;
     grad: string;
+    showGrid?: boolean;
 }
 
 interface ControllerProps {
@@ -63,22 +64,58 @@ const ColorController: React.FC<ControllerProps> = ({ color, setColor }) => {
         <ControlRow 
           val={color.c} max={0.37} step={0.001} 
           onChange={(v) => update('c', v)}
-          grad={`linear-gradient(to right, oklch(${color.l * 100}% 0 ${color.h}), oklch(${color.l * 100}% 0.37 ${color.h}))`} 
+          grad={`linear-gradient(to right, oklch(${color.l * 100}% 0 ${color.h}), oklch(${color.l * 100}% 0.37 ${color.h}))`}
+          showGrid={false}
         />
       </div>
     </div>
   );
 };
   
-const ControlRow: React.FC<ControlRowProps> = ({ val, max, step, onChange, grad }) => (
-    <div className="flex flex-col justify-end">
-        <input 
-        type="range" min="0" max={max} step={step} value={val} 
-        onChange={(e) => onChange(e.target.value)}
-        className="color-slider w-full h-10 rounded-lg transition-all duration-300"
-        style={{ background: grad }}
-        />
-    </div>
+const ControlRow: React.FC<ControlRowProps> = ({ val, max, step, onChange, grad, showGrid = true }) => (
+  <div
+    className={`
+      relative w-full h-10 overflow-hidden
+      ${showGrid ? 'rounded-r-lg' : 'rounded-lg'}
+    `}
+  >
+    {/* Original Gradient */}
+    <div
+      className="absolute inset-0"
+      style={{ background: grad }}
+    />
+
+    {/* Grid */}
+    {showGrid && (
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            repeating-linear-gradient(
+              45deg,
+              rgba(255,255,255,0.9) 0px,
+              rgba(255,255,255,0.05) 18px,
+              transparent 1px,
+              transparent 5px
+            )
+          `,
+          WebkitMaskImage: `linear-gradient(to right, black 0%, black 35%, transparent 75%)`,
+          maskImage: `linear-gradient(to right, black 0%, black 35%, transparent 75%)`
+        }}
+      />
+    )}
+
+    {/* slider */}
+    <input
+      type="range"
+      min="0"
+      max={max}
+      step={step}
+      value={val}
+      onChange={(e) => onChange(e.target.value)}
+      className="color-slider absolute inset-0 w-full h-10 bg-transparent z-10"
+    />
+  </div>
 );
 
 export default ColorController;
