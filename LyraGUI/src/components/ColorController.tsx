@@ -30,7 +30,7 @@ const ColorController: React.FC<ControllerProps> = ({ color, setColor }) => {
     }, [color.l, color.c]);
   
     return (
-      <div className="font-prosto-one w-full space-y-2">
+      <div className="font-prosto-one w-full space-y-6">
         <div className="">
           <div className="h-10 rounded-lg relative overflow-hidden">
             <div className="absolute inset-0 opacity-50" style={{ background: hueGrad }} />
@@ -43,7 +43,7 @@ const ColorController: React.FC<ControllerProps> = ({ color, setColor }) => {
           </div>
         </div>
   
-        <div className="space-y-2">
+        <div className="space-y-6">
           <ControlRow 
             val={color.l} max={1} step={0.01} 
             onChange={(v) => update('l', v)}

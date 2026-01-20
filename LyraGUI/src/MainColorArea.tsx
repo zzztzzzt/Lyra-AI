@@ -16,11 +16,8 @@ const MainColorArea: React.FC = () => {
     const accentA = useMemo(() => toStr(colorA), [colorA]);
 
     return(
-        <div className='flex flex-col items-center py-5 px-3 font-prosto-one'>
-            <div className='text-2xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary'>
-                Lyra training system
-            </div>
-            <div className='w-full h-10 mt-6 mb-2 rounded-lg' style={{ backgroundColor: accentA }}></div>
+        <div className='flex flex-col items-center pb-8 px-5 md:px-10 border-b-solid border-gray-300'>
+            <div className='w-full h-15 mt-6 mb-6 rounded-lg' style={{ backgroundColor: accentA }}></div>
 
             <ColorController color={colorA} setColor={setColorA} />
         </div>

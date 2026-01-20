@@ -25,8 +25,8 @@ export default defineConfig({
       getCSS: () => `
         .color-slider::-webkit-slider-thumb {
           -webkit-appearance: none;
-          width: 14px;
-          height: 14px;
+          width: 8px;
+          height: 8px;
           background: white;
           border-radius: 50%;
           box-shadow: 0 0 10px rgba(255,255,255,0.8);
