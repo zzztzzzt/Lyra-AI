@@ -2,14 +2,12 @@ import { defineConfig } from 'unocss'
 
 export default defineConfig({
   theme: {
-    colors: {
-      main: 'var(--main-color)',
-      primary: 'var(--primary-color)',
-      secondary: 'var(--secondary-color)',
-    },
     fontFamily: {
       'prosto-one': ['Prosto One', 'sans-serif']
-    }
+    },
+    fontSize: {
+      '2.5xl': ['1.7rem'], 
+    },
   },
   shortcuts: {
     'color-slider': `

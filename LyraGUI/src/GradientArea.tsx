@@ -1,28 +1,22 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 
+import type { OklchState } from "./App";
 import ColorController from "./components/ColorController";
 
-interface OklchState {
-    l: number;
-    c: number;
-    h: number;
+interface Props {
+  colorA: OklchState;
+  setColorA: React.Dispatch<React.SetStateAction<OklchState>>;
+  colorB: OklchState;
+  setColorB: React.Dispatch<React.SetStateAction<OklchState>>;
+  gradient: string;
 }
 
-const toStr = (col: OklchState) => `oklch(${(col.l * 100).toFixed(0)}% ${col.c.toFixed(3)} ${col.h})`;
-
-const GradientArea: React.FC = () => {
-  const [colorA, setColorA] = useState<OklchState>({ l: 0.7, c: 0.15, h: 250 });
-  const [colorB, setColorB] = useState<OklchState>({ l: 0.6, c: 0.25, h: 20 });
-
-  const accentA = useMemo(() => toStr(colorA), [colorA]);
-  const accentB = useMemo(() => toStr(colorB), [colorB]);
-  const mainGradient = `linear-gradient(90deg, ${accentA}, ${accentB})`;
-
+const GradientArea: React.FC<Props> = ({ colorA, setColorA, colorB, setColorB, gradient }) => {
   return(
       <div className="flex flex-col items-center pt-8 pb-8 px-5 md:px-10">
         <ColorController color={colorA} setColor={setColorA} />
 
-        <div className='w-full h-15 my-6 rounded-lg' style={{ backgroundImage: mainGradient }}></div>
+        <div className='w-full h-15 my-6 rounded-lg' style={{ backgroundImage: gradient }}></div>
 
         <ColorController color={colorB} setColor={setColorB} />
       </div>
