@@ -6,7 +6,7 @@ export default defineConfig({
       'prosto-one': ['Prosto One', 'sans-serif']
     },
     fontSize: {
-      '2.5xl': ['1.7rem'], 
+      '2.5xl': ['1.6rem'], 
     },
   },
   shortcuts: {

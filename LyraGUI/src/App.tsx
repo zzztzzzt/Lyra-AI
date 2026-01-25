@@ -2,6 +2,7 @@ import './App.css'
 import { useState, useMemo } from "react";
 import MainColorArea from './MainColorArea';
 import GradientArea from './GradientArea';
+import ShowCaseArea from './ShowCaseArea';
 
 export interface OklchState {
   l: number;
@@ -22,8 +23,8 @@ function App() {
   const mainGradient = `linear-gradient(90deg, ${accentA}, ${accentB})`;
 
   return (
-    <div className=''>
-      <div className='max-w-100 mx-auto font-prosto-one'>
+    <div className='lg:flex lg:flex-row-reverse'>
+      <div className='max-lg:max-w-100 lg:w-1/4 lg:min-w-100 lg:h-screen max-lg:mx-auto overflow-auto lg:border-l-solid border-gray-300 font-prosto-one'>
         <div className='mt-6 text-center text-3xl md:text-2.5xl'>
           <span className='text-transparent bg-clip-text' style={{ backgroundColor: accentM }}>Lyra </span>
           <span className='text-transparent bg-clip-text' style={{ backgroundImage: mainGradient }}>training system</span>
@@ -42,10 +43,9 @@ function App() {
           setColorB={setColorB}
           gradient={mainGradient}
         />
-
       </div>
-      <div>
-        <div className='bg-black w-full h-10'></div>
+      <div className='relative w-full lg:h-screen'>
+        <ShowCaseArea gradient={mainGradient} />
       </div>
     </div>
   )
