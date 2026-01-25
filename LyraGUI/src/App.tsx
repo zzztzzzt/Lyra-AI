@@ -2,7 +2,7 @@ import './App.css'
 import { useState, useMemo } from "react";
 import MainColorArea from './MainColorArea';
 import GradientArea from './GradientArea';
-import ShowCaseArea from './ShowCaseArea';
+import ShowcaseArea from './ShowcaseArea';
 
 export interface OklchState {
   l: number;
@@ -45,7 +45,7 @@ function App() {
         />
       </div>
       <div className='relative w-full lg:h-screen'>
-        <ShowCaseArea gradient={mainGradient} />
+        <ShowcaseArea gradient={mainGradient} />
       </div>
     </div>
   )
