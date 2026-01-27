@@ -13,7 +13,7 @@ interface Props {
 
 const GradientArea: React.FC<Props> = ({ colorA, setColorA, colorB, setColorB, gradient }) => {
   return(
-      <div className="flex flex-col items-center pt-8 pb-8 px-5 md:px-10">
+      <div className="flex flex-col items-center pt-8 pb-8 px-5 lg:px-10">
         <ColorController color={colorA} setColor={setColorA} />
 
         <div className='w-full h-15 my-6 rounded-lg' style={{ backgroundImage: gradient }}></div>

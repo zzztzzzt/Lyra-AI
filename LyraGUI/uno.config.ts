@@ -8,6 +8,11 @@ export default defineConfig({
     fontSize: {
       '2.5xl': ['1.6rem'], 
     },
+    colors: {
+      'for-uno': '#D9D9D9',
+      'for-tailwind': '#A8ECFF',
+      'for-panda': '#FFD476',
+    },
   },
   shortcuts: {
     'color-slider': `
