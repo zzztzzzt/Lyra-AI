@@ -3,6 +3,7 @@ import { useState, useMemo } from "react";
 import MainColorArea from './MainColorArea';
 import GradientArea from './GradientArea';
 import ShowcaseArea from './ShowcaseArea';
+import ActionBarArea from './ActionBarArea';
 
 export interface OklchState {
   l: number;
@@ -46,7 +47,7 @@ function App() {
   return (
     <div className='lg:flex lg:flex-row-reverse'>
       <div
-        className='max-lg:max-w-100 lg:w-1/4 lg:min-w-100 lg:h-screen max-lg:mx-auto overflow-auto lg:border-l-solid font-prosto-one'
+        className='max-lg:max-w-100 lg:w-1/4 lg:min-w-100 lg:h-screen max-lg:mx-auto overflow-auto lg:border-l-solid border-2 font-prosto-one'
         style={{ borderColor: accentM }}
       >
         <div className='mt-6 text-center text-3xl md:text-2.5xl'>
@@ -73,6 +74,10 @@ function App() {
           gradient={mainGradient}
           midColor={accentMid}
           accentM={accentM}
+        />
+
+        <ActionBarArea
+          gradient={mainGradient}
         />
       </div>
     </div>
