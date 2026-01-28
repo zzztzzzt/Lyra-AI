@@ -32,9 +32,9 @@ const getMidColor = (colorA: OklchState, colorB: OklchState): OklchState => {
 };
 
 function App() {
-  const [colorM, setColorM] = useState<OklchState>({ l: 0.9, c: 0.15, h: 157 });
-  const [colorA, setColorA] = useState<OklchState>({ l: 0.9, c: 0.15, h: 157 });
-  const [colorB, setColorB] = useState<OklchState>({ l: 0.92, c: 0.13, h: 203 });
+  const [colorM, setColorM] = useState<OklchState>({ l: 0.92, c: 0.141, h: 252 });
+  const [colorA, setColorA] = useState<OklchState>({ l: 0.8, c: 0.186, h: 266 });
+  const [colorB, setColorB] = useState<OklchState>({ l: 1, c: 0.06, h: 225 });
 
   const accentM = useMemo(() => toStr(colorM), [colorM]);
   const accentA = useMemo(() => toStr(colorA), [colorA]);
