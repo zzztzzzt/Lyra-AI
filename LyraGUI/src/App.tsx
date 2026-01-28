@@ -80,6 +80,7 @@ function App() {
           gradient={mainGradient}
           colorA={colorA}
           colorB={colorB}
+          accentM={accentM}
         />
       </div>
     </div>

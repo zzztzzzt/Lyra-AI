@@ -49,7 +49,7 @@ const BtnCopyCss: React.FC<Props> = ({ colorA, colorB, bgColor, btnText }) => {
   return (
     <div
       onClick={handleCopy}
-      className={`${bgColor} h-12 p-1.5 flex justify-center items-center text-center text-2.5xl text-white rounded-md font-prosto-one cursor-pointer`}
+      className={`${bgColor} lg:w-40 h-12 lg:h-10 p-1.5 lg:p-1 flex justify-center items-center text-center text-2.5xl lg:text-lg text-white rounded-md font-prosto-one cursor-pointer`}
     >
       {btnText}
     </div>
