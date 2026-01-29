@@ -13,30 +13,60 @@ interface Props {
 }
 
 const GradientBtnBasic: React.FC<Props> = ({ gradient, setColorData, colorA, colorB, colorM, btnText }) => {
+  const handleAdd = () => {
+    setColorData(prev => {
+      const lastPalette = prev.palettes[prev.palettes.length - 1];
+      const currentCount = lastPalette ? lastPalette.length : 0;
+      const isNewPalette = currentCount === 0 || currentCount === 7;
+      
+      let newColors: number[][] = [];
+      
+      if (isNewPalette) {
+        newColors = [ [colorM.l, colorM.c, colorM.h], [colorA.l, colorA.c, colorA.h], [colorB.l, colorB.c, colorB.h] ];
+        return {
+          ...prev,
+          palettes: [...prev.palettes, newColors]
+        };
+      } else {
+        newColors = [ [colorA.l, colorA.c, colorA.h], [colorB.l, colorB.c, colorB.h] ];
+        const updatedPalette = [...lastPalette, ...newColors];
+        return {
+          ...prev,
+          palettes: [...prev.palettes.slice(0, -1), updatedPalette]
+        };
+      }
+    });
+  };
+
+  const handleUndo = () => {
+    setColorData(prev => {
+      if (prev.palettes.length === 0) return prev;
+
+      const lastPalette = prev.palettes[prev.palettes.length - 1];
+      
+      // 3 colors, delete whole arr
+      if (lastPalette.length <= 3) {
+        return {
+          ...prev,
+          palettes: prev.palettes.slice(0, -1)
+        };
+      } 
+
+      // More than 3 colors, delete the last 2
+      const updatedPalette = lastPalette.slice(0, -2);
+      return {
+        ...prev,
+        palettes: [...prev.palettes.slice(0, -1), updatedPalette]
+      };
+    });
+  };
+
   const handleClick = () => {
     if (btnText === "Add") {
-      setColorData(prev => {
-        const lastPalette = prev.palettes[prev.palettes.length - 1];
-        const currentCount = lastPalette ? lastPalette.length : 0;
-        const isNewPalette = currentCount === 0 || currentCount === 7;
-        
-        let newColors: number[][] = [];
-        
-        if (isNewPalette) {
-          newColors = [ [colorM.l, colorM.c, colorM.h], [colorA.l, colorA.c, colorA.h], [colorB.l, colorB.c, colorB.h] ];
-          return {
-            ...prev,
-            palettes: [...prev.palettes, newColors]
-          };
-        } else {
-          newColors = [ [colorA.l, colorA.c, colorA.h], [colorB.l, colorB.c, colorB.h] ];
-          const updatedPalette = [...lastPalette, ...newColors];
-          return {
-            ...prev,
-            palettes: [...prev.palettes.slice(0, -1), updatedPalette]
-          };
-        }
-      });
+      handleAdd();
+    }
+    if (btnText === "Undo") {
+      handleUndo();
     }
   };
 
