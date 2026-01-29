@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { OklchState } from "../App";
-import type { ColorData } from "../ActionBarArea";
+import type { ColorData } from "../App";
 
 interface Props {
   gradient: string;
@@ -17,12 +17,12 @@ const GradientBtnBasic: React.FC<Props> = ({ gradient, setColorData, colorA, col
     if (btnText === "Add") {
       setColorData(prev => {
         const lastPalette = prev.palettes[prev.palettes.length - 1];
-        
         const currentCount = lastPalette ? lastPalette.length : 0;
+        const isNewPalette = currentCount === 0 || currentCount === 7;
         
         let newColors: number[][] = [];
         
-        if (currentCount === 0 || currentCount === 7) {
+        if (isNewPalette) {
           newColors = [ [colorM.l, colorM.c, colorM.h], [colorA.l, colorA.c, colorA.h], [colorB.l, colorB.c, colorB.h] ];
           return {
             ...prev,

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import type { OklchState } from "./App";
+import type { ColorData } from "./App";
 import GradientBtnBasic from "./components/GradientBtnBasic";
 import BtnCopyCss from "./components/BtnCopyCSS";
 
@@ -10,15 +11,11 @@ interface Props {
   colorB: OklchState;
   colorM: OklchState;
   accentM: string;
+  colorData: ColorData;
+  setColorData: React.Dispatch<React.SetStateAction<ColorData>>;
 }
 
-export interface ColorData {
-  palettes: number[][][];
-}
-
-const ActionBarArea: React.FC<Props> = ({ gradient, colorA, colorB, colorM, accentM }) => {
-  const [colorData, setColorData] = useState<ColorData>({ palettes: [] });
-
+const ActionBarArea: React.FC<Props> = ({ gradient, colorA, colorB, colorM, accentM, colorData, setColorData }) => {
   return(
     <div
       className="lg:absolute lg:h-3/7 lg:w-full lg:left-0 lg:bottom-0 lg:backdrop-blur-lg lg:border-t-solid border-2 overflow-y-auto"
@@ -26,24 +23,27 @@ const ActionBarArea: React.FC<Props> = ({ gradient, colorA, colorB, colorM, acce
     >
       <div className="px-5 lg:flex lg:flex-col-reverse">
         <div className="my-8 w-full h-120 space-y-3 max-lg:overflow-auto">
-          {colorData.palettes.map((palette, i) => (
-            <div key={i} className="flex gap-3">
-              {palette.map((color, j) => (
-                <div
-                  key={j}
-                  className="flex w-35 text-xs gap-1.5 items-center font-prosto-one"
-                >
+          {colorData.palettes
+            .slice() // Copy the array first to avoid modifying the original data
+            .reverse() // The latest information will be at the top
+            .map((palette, i) => (
+              <div key={i} className="flex gap-3">
+                {palette.map((color, j) => (
                   <div
-                    className="flex-1 w-8 min-w-8 max-w-8 h-8 min-h-8 rounded"
-                    style={{ backgroundColor: `oklch(${color[0]} ${color[1]} ${color[2]})` }}
-                  />
-                  <div className="text-center">
-                    { `${color[0]} ${color[1]} ${color[2]}` }
+                    key={j}
+                    className="flex w-35 text-xs gap-1.5 items-center font-prosto-one"
+                  >
+                    <div
+                      className="flex-1 w-8 min-w-8 max-w-8 h-8 min-h-8 rounded"
+                      style={{ backgroundColor: `oklch(${color[0]} ${color[1]} ${color[2]})` }}
+                    />
+                    <div className="text-center">
+                      { `${color[0]} ${color[1]} ${color[2]}` }
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ))}
+                ))}
+              </div>
+            ))}
 
           <details open>
             <summary className="cursor-pointer text-lg text-gray-700 font-prosto-one">

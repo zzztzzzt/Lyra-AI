@@ -11,6 +11,10 @@ export interface OklchState {
   h: number;
 }
 
+export interface ColorData {
+  palettes: number[][][];
+}
+
 const toStr = (col: OklchState) => `oklch(${(col.l * 100).toFixed(0)}% ${col.c.toFixed(3)} ${col.h})`;
 
 const getMidColor = (colorA: OklchState, colorB: OklchState): OklchState => {
@@ -32,9 +36,18 @@ const getMidColor = (colorA: OklchState, colorB: OklchState): OklchState => {
 };
 
 function App() {
+  const [colorData, setColorData] = useState<ColorData>({ palettes: [] });
   const [colorM, setColorM] = useState<OklchState>({ l: 0.92, c: 0.141, h: 252 });
   const [colorA, setColorA] = useState<OklchState>({ l: 0.8, c: 0.186, h: 266 });
   const [colorB, setColorB] = useState<OklchState>({ l: 1, c: 0.06, h: 225 });
+
+  // Derived State
+  const mainColorLock = useMemo(() => {
+    const lastPalette = colorData.palettes[colorData.palettes.length - 1];
+    const currentCount = lastPalette ? lastPalette.length : 0;
+
+    return currentCount > 0 && currentCount < 7;
+  }, [colorData]);
 
   const accentM = useMemo(() => toStr(colorM), [colorM]);
   const accentA = useMemo(() => toStr(colorA), [colorA]);
@@ -59,6 +72,7 @@ function App() {
           colorM={colorM}
           setColorM={setColorM}
           accentM={accentM}
+          mainColorLock={mainColorLock}
         />
 
         <GradientArea
@@ -82,6 +96,8 @@ function App() {
           colorB={colorB}
           colorM={colorM}
           accentM={accentM}
+          colorData={colorData}
+          setColorData={setColorData}
         />
       </div>
     </div>
