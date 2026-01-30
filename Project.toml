@@ -1,9 +1,6 @@
 [deps]
 Genie = "c43c736e-a2d1-11e8-161f-af95117fbd1e"
 JLD2 = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
-JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 Lux = "b2108857-7c20-44ae-9111-449ecde12c47"
 LyraDataTrain = "a5b160c5-d184-482e-9414-057ef810e32d"
 LyraUtils = "24a2e82d-562d-4a27-b8bd-7913bfc94e46"
-Optimisers = "3bd65402-5787-11e9-1adc-39752487f4e2"
-Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
