@@ -1,0 +1,13 @@
+name = "LyraDataTrain"
+uuid = "a5b160c5-d184-482e-9414-057ef810e32d"
+version = "0.1.0"
+authors = ["zzztzzzt <180073683+zzztzzzt@users.noreply.github.com>"]
+
+[deps]
+JLD2 = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+LyraUtils = "24a2e82d-562d-4a27-b8bd-7913bfc94e46"
+
+[compat]
+JLD2 = "0.6.3"
+JSON = "1.4.0"
