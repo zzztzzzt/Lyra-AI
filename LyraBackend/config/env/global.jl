@@ -7,4 +7,3 @@ ENV["ROOT_PARENT"] = dirname(APP_ROOT)
 
 ENV["EXTERNAL_CUSTOM_AI_MODEL_PATH"] = "models/trained_color_model.jld2"
 ENV["EXTERNAL_NEWEST_LYRA_MODEL_PATH"] = "models/Lyra1.0.jld2"
-ENV["EXTERNAL_LYRA_UTILS_PATH"] = "src/lyra_utils"

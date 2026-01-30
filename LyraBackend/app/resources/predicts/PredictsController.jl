@@ -3,7 +3,7 @@ module PredictsController
 using Genie.Renderer.Json, Genie.Requests
 using Lux, JLD2
 
-include(joinpath(ENV["ROOT_PARENT"], ENV["EXTERNAL_LYRA_UTILS_PATH"], "ColorOKLab.jl"))
+using LyraUtils.ColorOKLab
 
 # After obtaining the path from ENV, check if the file exists
 const model_path = begin
