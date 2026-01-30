@@ -1,0 +1,10 @@
+name = "LyraUtils"
+uuid = "24a2e82d-562d-4a27-b8bd-7913bfc94e46"
+version = "0.1.0"
+authors = ["zzztzzzt <180073683+zzztzzzt@users.noreply.github.com>"]
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[compat]
+LinearAlgebra = "1.12.0"

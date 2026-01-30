@@ -1,6 +1,7 @@
 using JLD2
-include("../src/lyra_utils/ColorOKLab.jl")
-include("../src/lyra_utils/PaletteAugment.jl")
+
+using LyraUtils.ColorOKLab
+using LyraUtils.PaletteAugment
 
 const OKLAB_DIM = 3
 const PALETTE_SIZE = 9

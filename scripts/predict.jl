@@ -1,5 +1,6 @@
 using Lux, JLD2
-include("../src/lyra_utils/ColorOKLab.jl")
+
+using LyraUtils.ColorOKLab
 
 # 1. Load Model
 @load "models/trained_color_model.jld2" tstate

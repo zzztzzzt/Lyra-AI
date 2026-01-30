@@ -1,4 +1,10 @@
+module ColorOKLab
+
 using LinearAlgebra
+
+export
+    hex_to_oklab_vec,
+    oklab_to_hex
 
 function srgb_to_linear(c)
     return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055)^2.4
@@ -62,3 +68,5 @@ function oklab_to_hex(lab::AbstractVector)
     r, g, b = Int.(round.(rgb .* 255))
     return "#" * uppercase(hex(r, 2) * hex(g, 2) * hex(b, 2))
 end
+
+end # module ColorOKLab

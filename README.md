@@ -71,10 +71,6 @@ or
 
 `"85FF80", "00C073", "CFFFBB", "8EFFA9", "95FFEC", "399A02", "68FFE1"`
 
-if you choose " input one color everytime ", you can type in below format
-
-`85FF80` or `"85FF80"`
-
 after the dataset is enough, run training code
 
 `julia --project=. scripts/train.jl`

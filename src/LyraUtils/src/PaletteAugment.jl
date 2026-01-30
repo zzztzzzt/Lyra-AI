@@ -1,3 +1,9 @@
+module PaletteAugment
+
+export
+    augment_sample_brightness,
+    augment_sample_chroma
+
 # generate an augmented sample by scaling brightness (multiplicative).
 function augment_sample_brightness(
     main_v::Vector{Float32},
@@ -43,3 +49,5 @@ function augment_sample_chroma(
 
     return aug_x, aug_y
 end
+
+end # module PaletteAugment
