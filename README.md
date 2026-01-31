@@ -24,26 +24,18 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 3. cd project root & run below : 
 
-```shell
-julia
-```
-```shell
-]
-```
-```shell
-activate .
-```
-```shell
-instantiate
-```
-```shell
-dev src/LyraUtils
-```
-```shell
-dev src/LyraDataTrain
-```
+`julia`
+
+`] activate .`
+
+`instantiate`
+
+`dev src/LyraUtils`
+
+`dev src/LyraDataTrain`
 
 and type `backspace` to close pkg mode
+
 type `Ctrl + D` to close Julia REPL
 
 4. Start training, here are 3 different ways
@@ -53,46 +45,35 @@ type `Ctrl + D` to close Julia REPL
 [ wip ]
 
 1. Let your CLI / shell go into folder `/LyraBackend/`. And run below : 
+
 `( Genie Backend is in different environment, so even you already ran below command at project root, you still need to run it again here. )`
 
-```shell
-julia
-```
-```shell
-]
-```
-```shell
-activate .
-```
-```shell
-instantiate
-```
-```shell
-dev src/LyraUtils
-```
-```shell
-dev src/LyraDataTrain
-```
-```shell
-using Genie
-```
-```shell
-Genie.loadapp()
-```
-```shell
-up()
-```
+`julia`
+
+`] activate .`
+
+`instantiate`
+
+`dev src/LyraUtils`
+
+`dev src/LyraDataTrain`
+
+`using Genie`
+
+`Genie.loadapp()`
+
+`up()`
+
+and then your backend app is running now
 
 2. Open another CLI / shell, go into project root folder, then go into folder `/LyraGUI/`. And run below : 
 
-```shell
-npm install
-```
-```shell
-npm run dev
-```
+`npm install`
+
+`npm run dev`
 
 open the URL on your CLI / shell.
+
 after training, your model will be saved in `models/trained_color_model.jld2`
 
 ### Option 2. Batch Training ( Recommended )
