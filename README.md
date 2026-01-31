@@ -22,13 +22,78 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 2. Download or git clone this project
 
-3. cd project root & run `julia --project=. -e 'import Pkg; Pkg.instantiate()'`
+3. cd project root & run below : 
+
+```shell
+julia
+```
+```shell
+]
+```
+```shell
+activate .
+```
+```shell
+instantiate
+```
+```shell
+dev src/LyraUtils
+```
+```shell
+dev src/LyraDataTrain
+```
+
+and type `backspace` to close pkg mode
+type `Ctrl + D` to close Julia REPL
 
 4. Start training, here are 3 different ways
 
 ### Option 1. Training via GUI ( Recommended )
 
 [ wip ]
+
+1. Let your CLI / shell go into folder `/LyraBackend/`. And run below : 
+`( Genie Backend is in different environment, so even you already ran below command at project root, you still need to run it again here. )`
+
+```shell
+julia
+```
+```shell
+]
+```
+```shell
+activate .
+```
+```shell
+instantiate
+```
+```shell
+dev src/LyraUtils
+```
+```shell
+dev src/LyraDataTrain
+```
+```shell
+using Genie
+```
+```shell
+Genie.loadapp()
+```
+```shell
+up()
+```
+
+2. Open another CLI / shell, go into project root folder, then go into folder `/LyraGUI/`. And run below : 
+
+```shell
+npm install
+```
+```shell
+npm run dev
+```
+
+open the URL on your CLI / shell.
+after training, your model will be saved in `models/trained_color_model.jld2`
 
 ### Option 2. Batch Training ( Recommended )
 
@@ -80,6 +145,8 @@ your model will be saved in `models/trained_color_model.jld2`
 ### Final Step : Predict
 
 run `julia --project=. scripts/predict.jl` to test
+
+## Project Debug
 
 ## Version History ( Training Process & Predictions )
 
