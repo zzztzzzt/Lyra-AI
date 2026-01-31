@@ -1,6 +1,6 @@
 # Lyra
 
-[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue)](https://huggingface.co/zzztzzzt)
+[![Hugging Face Model](https://img.shields.io/badge/-HuggingFace-3B4252?style=flat&logo=huggingface&logoColor=)](https://huggingface.co/zzztzzzt)
 [![GitHub last commit](https://img.shields.io/github/last-commit/zzztzzzt/Lyra-AI.svg)](https://github.com/zzztzzzt/Lyra-AI)
 [![GitHub repo size](https://img.shields.io/github/repo-size/zzztzzzt/Lyra-AI.svg)](https://github.com/zzztzzzt/Lyra-AI)
 
