@@ -146,6 +146,7 @@ run `julia --project=. scripts/predict.jl` to test
 ## Project Debug
 
 1. Now /src/ folder have 2 customized pkg ( `LyraUtils` & `LyraDataTrain` ). To add new pkg in /src/, you need to run below at /src/ : 
+
 `julia`
 
 `] generate YourNewPkgName`
@@ -153,6 +154,7 @@ run `julia --project=. scripts/predict.jl` to test
 ( all your jl codes needs to be `module` type )
 
 2. If you add any new dependencies into your customized pkg's `project.toml`, you need to run below command on `every environment` which is using your customized pkg ( or it won't auto update )
+
 `julia`
 
 `] activate .`
@@ -160,6 +162,7 @@ run `julia --project=. scripts/predict.jl` to test
 `dev src/YourNewPkgName`
 
 3. If your pkg problems still exist, try below command too : 
+
 ( it will check the package dependencies )
 
 `julia`
