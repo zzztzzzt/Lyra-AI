@@ -145,7 +145,7 @@ run `julia --project=. scripts/predict.jl` to test
 
 ## Project Debug
 
-1. Now /src/ folder have 2 customized pkg ( `LyraUtils` & `LyraDataTrain` ). To add new pkg in /src/, you need to run below at /src/ : 
+1. Now /src/ folder have 2 customized pkg ( `LyraUtils` & `LyraDataTrain` ). To add new pkg, you need to run below at /src/ : 
 
 `julia`
 
