@@ -1,7 +1,8 @@
 # Lyra
 
-![GitHub last commit](https://img.shields.io/github/last-commit/zzztzzzt/Lyra-AI.svg)
-![GitHub repo size](https://img.shields.io/github/repo-size/zzztzzzt/Lyra-AI.svg)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue)](https://huggingface.co/zzztzzzt)
+[![GitHub last commit](https://img.shields.io/github/last-commit/zzztzzzt/Lyra-AI.svg)](https://github.com/zzztzzzt/Lyra-AI)
+[![GitHub repo size](https://img.shields.io/github/repo-size/zzztzzzt/Lyra-AI.svg)](https://github.com/zzztzzzt/Lyra-AI)
 
 <br>
 <img src="https://github.com/zzztzzzt/Lyra-AI/blob/main/logo/favicon.png" alt="lyra-logo" style="height: 280px; width: auto;" />
@@ -10,15 +11,26 @@
 
 IMPORTANT : This project is still in the development and testing stages, licensing terms may be updated in the future. Please don't do any commercial usage currently.
 
-![Julia](https://img.shields.io/badge/Julia-9558B2?style=for-the-badge&logo=julia&logoColor=white)
-![LuxJl](https://img.shields.io/badge/Lux.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)
-![GenieJl](https://img.shields.io/badge/Genie.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-9135FF?style=for-the-badge&logo=vite&logoColor=white)
-![UnoCSS](https://img.shields.io/badge/Uno_CSS-333333?style=for-the-badge&logo=unocss&logoColor=white)
+[![Julia](https://img.shields.io/badge/Julia-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/JuliaLang/julia)
+[![LuxJl](https://img.shields.io/badge/Lux.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/LuxDL/Lux.jl)
+[![GenieJl](https://img.shields.io/badge/Genie.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/GenieFramework/Genie.jl)
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://github.com/facebook/react)
+[![Vite](https://img.shields.io/badge/Vite-9135FF?style=for-the-badge&logo=vite&logoColor=white)](https://github.com/vitejs/vite)
+[![UnoCSS](https://img.shields.io/badge/Uno_CSS-333333?style=for-the-badge&logo=unocss&logoColor=white)](https://github.com/unocss/unocss)
 
 Lyra uses Lux.jl for deep learning. Lux.jl licensed under the MIT License.  
 Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://github.com/LuxDL/Lux.jl/blob/main/LICENSE)
+
+Lyra uses Genie.jl for Training-GUI Backend. Genie.jl licensed under the MIT License.
+Genie.jl License : [https://github.com/GenieFramework/Genie.jl/blob/main/LICENSE.md](https://github.com/GenieFramework/Genie.jl/blob/main/LICENSE.md)
+
+Lyra uses React, UnoCSS for Training-GUI Design. And uses Vite as build tool. React, UnoCSS & Vite licensed under the MIT License.
+
+React License : [https://github.com/facebook/react/blob/main/LICENSE](https://github.com/facebook/react/blob/main/LICENSE)
+<br>
+UnoCSS License : [https://github.com/unocss/unocss/blob/main/LICENSE](https://github.com/unocss/unocss/blob/main/LICENSE)
+<br>
+Vite License : [https://github.com/vitejs/vite/blob/main/LICENSE](https://github.com/vitejs/vite/blob/main/LICENSE)
 
 ## How To Train
 
@@ -38,9 +50,9 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 `dev src/LyraDataTrain`
 
-and type `backspace` to close pkg mode
+and press `backspace` to close pkg mode
 
-type `Ctrl + D` to close Julia REPL
+press `Ctrl + D` to close Julia REPL
 
 4. Start training, here are 3 different ways
 
@@ -132,6 +144,29 @@ your model will be saved in `models/trained_color_model.jld2`
 run `julia --project=. scripts/predict.jl` to test
 
 ## Project Debug
+
+1. Now /src/ folder have 2 customized pkg ( `LyraUtils` & `LyraDataTrain` ). To add new pkg in /src/, you need to run below at /src/ : 
+`julia`
+
+`] generate YourNewPkgName`
+
+( all your jl codes needs to be `module` type )
+
+2. If you add any new dependencies into your customized pkg's `project.toml`, you need to run below command on `every environment` which is using your customized pkg ( or it won't auto update )
+`julia`
+
+`] activate .`
+
+`dev src/YourNewPkgName`
+
+3. If your pkg problems still exist, try below command too : 
+( it will check the package dependencies )
+
+`julia`
+
+`] activate .`
+
+`resolve`
 
 ## Version History ( Training Process & Predictions )
 
