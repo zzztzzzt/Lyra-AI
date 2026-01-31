@@ -16,7 +16,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
         exit(1)
     end
     
-    process_json_palettes(json_file, output_file)
+    process_json_palettes(json_file, output_file, false)
 end
 
 #=

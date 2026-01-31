@@ -4,6 +4,7 @@ using LinearAlgebra
 
 export
     hex_to_oklab_vec,
+    oklch_to_oklab_vec,
     oklab_to_hex
 
 function srgb_to_linear(c)
@@ -67,6 +68,23 @@ function oklab_to_hex(lab::AbstractVector)
     # Convert to Hex string
     r, g, b = Int.(round.(rgb .* 255))
     return "#" * uppercase(hex(r, 2) * hex(g, 2) * hex(b, 2))
+end
+
+function oklch_to_oklab_vec(oklch::AbstractVector{<:Real})
+    if length(oklch) != 3
+        error("OKLCH must be [L, C, h], got length $(length(oklch))")
+    end
+
+    L = Float32(oklch[1])
+    C = Float32(oklch[2])
+    h_deg = Float32(oklch[3])
+
+    h_rad = deg2rad(h_deg)
+
+    a = C * cos(h_rad)
+    b = C * sin(h_rad)
+
+    return Float32[L, a, b]
 end
 
 end # module ColorOKLab
