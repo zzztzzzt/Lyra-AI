@@ -70,9 +70,9 @@ press `Ctrl + D` to close Julia REPL
 
 `instantiate`
 
-`dev src/LyraUtils`
+`dev ../src/LyraUtils`
 
-`dev src/LyraDataTrain`
+`dev ../src/LyraDataTrain`
 
 `using Genie`
 
