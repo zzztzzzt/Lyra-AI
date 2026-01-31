@@ -1,4 +1,8 @@
 # Lyra
+
+![GitHub last commit](https://img.shields.io/github/last-commit/zzztzzzt/Lyra-AI.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/zzztzzzt/Lyra-AI.svg)
+
 <br>
 <img src="https://github.com/zzztzzzt/Lyra-AI/blob/main/logo/favicon.png" alt="lyra-logo" style="height: 280px; width: auto;" />
 
@@ -18,7 +22,7 @@ Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://git
 
 ## How To Train
 
-1. Install Julia : [https://github.com/JuliaLang/julia](https://github.com/JuliaLang/julia)
+1. Install Julia : [https://julialang.org/](https://julialang.org/)
 
 2. Download or git clone this project
 
