@@ -74,6 +74,12 @@ press `Ctrl + D` to close Julia REPL
 
 `dev ../src/LyraDataTrain`
 
+and below is the process you need to run `every time when you open LyraBackend` : 
+
+make sure you already run `julia` & `] activate .`
+
+press `backspace`
+
 `using Genie`
 
 `Genie.loadapp()`
@@ -166,7 +172,7 @@ your model will be saved in `models/trained_color_model.jld2`
 
 run `julia --project=. scripts/predict.jl` to test
 
-## Project Debug
+## Project Detail / Debug
 
 1. Now /src/ folder have 2 customized pkg ( `LyraUtils` & `LyraDataTrain` ). To add new pkg, you need to run below at /src/ : 
 
@@ -193,6 +199,14 @@ run `julia --project=. scripts/predict.jl` to test
 `] activate .`
 
 `resolve`
+
+4. At LyraBackend ( Genie.jl ), if you want to create new Controller & resource, run below at /LyraBackend/ : 
+
+`julia --project=.`
+
+`using Genie`
+
+`Genie.Generator.newresource("TheName")`
 
 ## Version History ( Training Process & Predictions )
 

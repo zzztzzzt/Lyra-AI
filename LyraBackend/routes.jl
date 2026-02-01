@@ -1,6 +1,5 @@
 using Genie.Router
 
-include("app/resources/predicts/predictsController.jl")
 using .PredictsController
 
 route("/") do
