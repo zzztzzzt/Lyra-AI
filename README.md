@@ -102,7 +102,7 @@ after training, your model will be saved in `models/trained_color_model.jld2`
 
 ### Option 2. Batch Training ( Recommended )
 
-modify `training_data.json` at project root
+modify `training_data_example_oklch.json` or `training_data_example.json` at project root
 
 JSON fromat example is at below, here are 2 ways to build dataset : 
 
