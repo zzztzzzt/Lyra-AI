@@ -36,24 +36,18 @@ function train_from_file(data_path::String, model_path::String)
         error("Expected Y dimension to be $(OUT_DIM), but got $(size(Y, 1)). Please regenerate your dataset with the new structure.")
     end
 
-    # 3. Define Model (add LayerNorm to make colors more stable) / Load Model (resume training if exists)
-    if isfile(model_path)
-        println("⭐ ||||||  Loading existing model : $model_path  |||||| ⭐")
-        @load model_path tstate
-    else
-        println("⭐ ||||||  No existing model found, training from scratch  |||||| ⭐")
-        model = Chain(
-            Dense(IN_DIM => HIDDEN, relu),
-            LayerNorm((HIDDEN,)),
-            Dense(HIDDEN => HIDDEN, relu),
-            Dense(HIDDEN => OUT_DIM)
-        )
+    # 3. Define Model (add LayerNorm to make colors more stable)
+    model = Chain(
+        Dense(IN_DIM => HIDDEN, relu),
+        LayerNorm((HIDDEN,)),
+        Dense(HIDDEN => HIDDEN, relu),
+        Dense(HIDDEN => OUT_DIM)
+    )
 
-        rng = Random.default_rng()
-        ps, st = Lux.setup(rng, model)
-        opt = Optimisers.Adam(LR)
-        tstate = Lux.Training.TrainState(model, ps, st, opt)
-    end
+    rng = Random.default_rng()
+    ps, st = Lux.setup(rng, model)
+    opt = Optimisers.Adam(LR)
+    tstate = Lux.Training.TrainState(model, ps, st, opt)
 
     # 4. Training
     println("Training Started")
