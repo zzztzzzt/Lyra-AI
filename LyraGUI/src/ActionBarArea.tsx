@@ -59,9 +59,9 @@ const ActionBarArea: React.FC<Props> = ({ gradient, colorA, colorB, colorM, acce
 
         <div className="lg:mt-8 flex flex-col 2xl:flex-row-reverse lg:items-start lg:justify-center 2xl:justify-end max-lg:space-y-8 max-2xl:space-y-3 2xl:gap-3">
             <div className="max-lg:space-y-8 lg:gap-3 lg:flex lg:flex-row-reverse">
-              <GradientBtnBasic gradient={gradient} setColorData={setColorData} colorA={colorA} colorB={colorB} colorM={colorM} btnText={"Add"} />
-              <GradientBtnBasic gradient={gradient} setColorData={setColorData} colorA={colorA} colorB={colorB} colorM={colorM} btnText={"Undo"} />
-              <GradientBtnBasic gradient={gradient} setColorData={setColorData} colorA={colorA} colorB={colorB} colorM={colorM} btnText={"Train"} />
+              <GradientBtnBasic gradient={gradient} colorData={colorData} setColorData={setColorData} colorA={colorA} colorB={colorB} colorM={colorM} btnText={"Add"} />
+              <GradientBtnBasic gradient={gradient} colorData={colorData} setColorData={setColorData} colorA={colorA} colorB={colorB} colorM={colorM} btnText={"Undo"} />
+              <GradientBtnBasic gradient={gradient} colorData={colorData} setColorData={setColorData} colorA={colorA} colorB={colorB} colorM={colorM} btnText={"Train"} />
             </div>
 
             <div className="max-lg:space-y-8 lg:gap-3 lg:flex lg:flex-row-reverse">

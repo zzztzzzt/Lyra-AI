@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import type { OklchState } from "../App";
 import type { ColorData } from "../App";
 
 interface Props {
   gradient: string;
+  colorData: ColorData;
   setColorData: React.Dispatch<React.SetStateAction<ColorData>>;
   colorA: OklchState;
   colorB: OklchState;
@@ -12,7 +13,10 @@ interface Props {
   btnText: string;
 }
 
-const GradientBtnBasic: React.FC<Props> = ({ gradient, setColorData, colorA, colorB, colorM, btnText }) => {
+const GradientBtnBasic: React.FC<Props> = ({ gradient, colorData, setColorData, colorA, colorB, colorM, btnText }) => {
+  const [isTraining, setIsTraining] = useState(false);
+  const [trainMessage, setTrainMessage] = useState("Train");
+
   const handleAdd = () => {
     setColorData(prev => {
       const lastPalette = prev.palettes[prev.palettes.length - 1];
@@ -61,12 +65,59 @@ const GradientBtnBasic: React.FC<Props> = ({ gradient, setColorData, colorA, col
     });
   };
 
+  const handleTrain = async () => {
+    if (isTraining) return;
+
+    setIsTraining(true);
+    setTrainMessage("...");
+
+    try {
+      const response = await fetch('http://localhost:8000/api/train', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(colorData),
+      });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to submit training data');
+      }
+  
+      const result = await response.json();
+      console.log('Training data submitted successfully:', result);
+
+      setTrainMessage("Finished");
+
+      setTimeout(() => {
+        setTrainMessage("Train");
+        setIsTraining(false);
+      }, 1000);
+
+      return result;
+    } catch (error) {
+      console.error('Error submitting training data:', error);
+
+      setTrainMessage("Failed");
+      setTimeout(() => {
+        setTrainMessage("Train");
+        setIsTraining(false);
+      }, 1000);
+
+      throw error;
+    }
+  };
+
   const handleClick = () => {
     if (btnText === "Add") {
       handleAdd();
     }
     if (btnText === "Undo") {
       handleUndo();
+    }
+    if (btnText === "Train") {
+      handleTrain();
     }
   };
 
@@ -75,7 +126,15 @@ const GradientBtnBasic: React.FC<Props> = ({ gradient, setColorData, colorA, col
       className="h-12 lg:h-10 p-1.5 lg:p-1 rounded-lg font-prosto-one cursor-pointer" style={{ backgroundImage: gradient }}
       onClick={ handleClick }
     >
-        <div className="bg-white lg:w-40 h-full flex justify-center items-center text-center text-2.5xl lg:text-lg text-gray-500 rounded-md">{btnText}</div>
+        <div className={`bg-white lg:w-40 h-full flex justify-center items-center text-center text-2.5xl lg:text-lg rounded-md
+          ${ btnText !== "Train" ? "text-gray-500" : "" }
+          ${ isTraining && trainMessage.includes("Finished") ? "text-green-400" : "" }
+          ${ isTraining && trainMessage.includes("Failed") ? "text-red-400" : "" }
+
+          ${ isTraining ? "cursor-not-allowed" : "" }
+        `}>
+          {btnText === "Train" ? trainMessage : btnText}
+        </div>
     </div>
   );
 };

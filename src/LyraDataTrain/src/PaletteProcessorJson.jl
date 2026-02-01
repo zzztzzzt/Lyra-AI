@@ -7,9 +7,14 @@ using LyraDataTrain.PaletteProcessor
 export
     process_json_palettes
 
+# Accept file path (String)
 function process_json_palettes(json_file::String, output_file::String, is_oklch_json::Bool)
     data = JSON.parsefile(json_file)
-    
+    return process_json_palettes(data, output_file, is_oklch_json)
+end
+
+# Accept parsed JSON data (JSON.Object)
+function process_json_palettes(data::AbstractDict, output_file::String, is_oklch_json::Bool)
     total_processed = 0
     
     # Check JSON format and process
