@@ -211,7 +211,7 @@ run `julia --project=. scripts/predict.jl` to test
 ## Version History ( Training Process & Predictions )
 
 #### Lyra 1.5 (2026.02) - Predictions
-![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.5_predictions.jpg)
+![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.5_predictions.png)
 
 #### Lyra 1.0 (2026.01) - Predictions
 ![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0_predictions.jpg)
