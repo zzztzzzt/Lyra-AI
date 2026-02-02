@@ -88,6 +88,8 @@ function App() {
           gradient={mainGradient}
           midColor={accentMid}
           accentM={accentM}
+          accentA={accentA}
+          accentB={accentB}
         />
 
         <ActionBarArea
