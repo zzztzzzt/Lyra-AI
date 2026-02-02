@@ -1,6 +1,6 @@
 module Train
 
-using Lux, Random, Optimisers, Statistics, Zygote, JLD2
+using Lux, MLUtils, Random, Optimisers, Statistics, Zygote, JLD2
 
 export
     train_from_file
@@ -36,6 +36,12 @@ function train_from_file(data_path::String, model_path::String)
         error("Expected Y dimension to be $(OUT_DIM), but got $(size(Y, 1)). Please regenerate your dataset with the new structure.")
     end
 
+    train_loader = DataLoader((X, Y);
+        batchsize = BATCH_SIZE,
+        shuffle = true, # reshuffle every epoch
+        partial = true # avoid dropping the last few samples
+    )
+
     # 3. Define Model (add LayerNorm to make colors more stable)
     model = Chain(
         Dense(IN_DIM => HIDDEN, relu),
@@ -52,15 +58,27 @@ function train_from_file(data_path::String, model_path::String)
     # 4. Training
     println("Training Started")
     for epoch in 1:N_EPOCHS
-        grads, loss, stats, tstate = Lux.Training.single_train_step!(
-            AutoZygote(), 
-            # Switch MSE to MAE for more robust regression loss
-            (m, p, s, d) -> (mean(abs, Lux.apply(m, d[1], p, s)[1] .- d[2]), Lux.apply(m, d[1], p, s)[2], ()),
-            (X, Y), tstate
-        )
-        
+        total_loss = 0.0f0
+        n_batches = 0
+
+        for (x_batch, y_batch) in train_loader
+            grads, loss, stats, tstate = Lux.Training.single_train_step!(
+                AutoZygote(),
+                (m, p, s, d) -> begin
+                    pred, st_new = Lux.apply(m, d[1], p, s)
+                    l = mean(abs, pred .- d[2])
+                    return (l, st_new, ())                           # loss, new state, empty stats
+                end,
+                (x_batch, y_batch),
+                tstate
+            )
+            total_loss += loss
+            n_batches += 1
+        end
+
         if epoch % 50 == 0
-            println("Epoch $epoch | Loss: $(round(loss, digits=6))")
+            avg_loss = total_loss / n_batches
+            println("Epoch $epoch | Avg Loss: $(round(avg_loss, digits=6))")
         end
     end
 

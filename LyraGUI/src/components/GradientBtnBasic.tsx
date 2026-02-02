@@ -128,6 +128,8 @@ const GradientBtnBasic: React.FC<Props> = ({ gradient, colorData, setColorData, 
     >
         <div className={`bg-white lg:w-40 h-full flex justify-center items-center text-center text-2.5xl lg:text-lg rounded-md
           ${ btnText !== "Train" ? "text-gray-500" : "" }
+          ${ btnText === "Train" && !isTraining ? "text-gray-500" : "" }
+          
           ${ isTraining && trainMessage.includes("Finished") ? "text-green-400" : "" }
           ${ isTraining && trainMessage.includes("Failed") ? "text-red-400" : "" }
 
