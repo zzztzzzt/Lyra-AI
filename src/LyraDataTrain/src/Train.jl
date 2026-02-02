@@ -67,7 +67,7 @@ function train_from_file(data_path::String, model_path::String)
                 (m, p, s, d) -> begin
                     pred, st_new = Lux.apply(m, d[1], p, s)
                     l = mean(abs, pred .- d[2])
-                    return (l, st_new, ())                           # loss, new state, empty stats
+                    return (l, st_new, ()) # loss, new state, empty stats
                 end,
                 (x_batch, y_batch),
                 tstate
