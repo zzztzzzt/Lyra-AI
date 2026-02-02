@@ -140,7 +140,7 @@ OR
 
 in project folder, command below
 
-`julia --project=. scripts/build_data_batch.jl training_data_example.json`
+`julia --project=. scripts/build_data_batch.jl your_hex_training_data_example.json`
 
 after the dataset is enough, run training code
 
