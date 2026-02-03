@@ -58,7 +58,9 @@ press `Ctrl + D` to close Julia REPL
 
 ### Option 1. Training via GUI ( Recommended )
 
-[ wip ]
+![GUI-01](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/gui-01.webp)
+
+![GUI-02](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/gui-02.webp)
 
 1. Let your CLI / shell go into folder `/LyraBackend/`. And run below : 
 
@@ -211,10 +213,13 @@ run `julia --project=. scripts/predict.jl` to test
 ## Version History ( Training Process & Predictions )
 
 #### Lyra 1.5 (2026.02) - Predictions
-![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.5_predictions.png)
+![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.5_predictions.png)
+
+#### Lyra 1.5 (2026.02) - Training Process
+![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.5_training_process.webp)
 
 #### Lyra 1.0 (2026.01) - Predictions
-![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0_predictions.jpg)
+![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.0_predictions.jpg)
 
 #### Lyra 1.0 (2026.01) - Training Process
-![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_data_showcase/Lyra1.0_training_process.webp)
+![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.0_training_process.webp)
