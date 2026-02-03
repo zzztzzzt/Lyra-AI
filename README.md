@@ -54,11 +54,13 @@ and press `backspace` to close pkg mode
 
 press `Ctrl + D` to close Julia REPL
 
-4. Start training, here are 3 different ways
+4. Start training, here are 3 different ways : 
 
 ### Option 1. Training via GUI ( Recommended )
 
 ![GUI-01](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/gui-01.webp)
+
+### ( You can change training mode ( Palette or Gradient ) to fit your color-set style )
 
 ![GUI-02](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/gui-02.webp)
 
