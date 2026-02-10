@@ -4,8 +4,9 @@ using LinearAlgebra
 
 export
     hex_to_oklab_vec,
+    oklab_to_hex,
     oklch_to_oklab_vec,
-    oklab_to_hex
+    oklab_to_oklch_vec
 
 function srgb_to_linear(c)
     return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055)^2.4
@@ -85,6 +86,25 @@ function oklch_to_oklab_vec(oklch::AbstractVector{<:Real})
     b = C * sin(h_rad)
 
     return Float32[L, a, b]
+end
+
+function oklab_to_oklch_vec(lab::AbstractVector{<:Real})
+    if length(lab) != 3
+        error("OKLab must be [L, a, b], got length $(length(lab))")
+    end
+
+    L = Float32(lab[1])
+    a = Float32(lab[2])
+    b = Float32(lab[3])
+
+    C = sqrt(a^2 + b^2)
+    h_rad = atan(b, a)
+    h_deg = rad2deg(h_rad)
+    if h_deg < 0
+        h_deg += 360f0
+    end
+
+    return Float32[L, C, h_deg]
 end
 
 end # module ColorOKLab
