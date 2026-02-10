@@ -12,6 +12,23 @@
 
 IMPORTANT : This project is still in the development and testing stages, licensing terms may be updated in the future. Please don't do any commercial usage currently.
 
+## Project Dependencies Guide
+
+[![Julia](https://img.shields.io/badge/Julia-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/JuliaLang/julia)
+[![LuxJl](https://img.shields.io/badge/Lux.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/LuxDL/Lux.jl)
+[![GenieJl](https://img.shields.io/badge/Genie.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/GenieFramework/Genie.jl)
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://github.com/facebook/react)
+[![Vite](https://img.shields.io/badge/Vite-9135FF?style=for-the-badge&logo=vite&logoColor=white)](https://github.com/vitejs/vite)
+[![UnoCSS](https://img.shields.io/badge/Uno_CSS-333333?style=for-the-badge&logo=unocss&logoColor=white)](https://github.com/unocss/unocss)
+
+**[ for Dependencies Details please see the end of this README ]**
+
+Lyra uses Lux.jl for deep learning. Lux.jl licensed under the MIT License.  
+
+Lyra uses Genie.jl for Training-GUI Backend. Genie.jl licensed under the MIT License.
+
+Lyra uses React, UnoCSS for Training-GUI Design. And uses Vite as build tool. React, UnoCSS & Vite licensed under the MIT License.
+
 ## How To Train
 
 1. Install Julia : [https://julialang.org/](https://julialang.org/)
@@ -208,23 +225,16 @@ run `julia --project=. scripts/predict.jl` to test
 
 ## Project Dependencies Details
 
-[![Julia](https://img.shields.io/badge/Julia-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/JuliaLang/julia)
-[![LuxJl](https://img.shields.io/badge/Lux.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/LuxDL/Lux.jl)
-[![GenieJl](https://img.shields.io/badge/Genie.jl-9558B2?style=for-the-badge&logo=julia&logoColor=white)](https://github.com/GenieFramework/Genie.jl)
-[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://github.com/facebook/react)
-[![Vite](https://img.shields.io/badge/Vite-9135FF?style=for-the-badge&logo=vite&logoColor=white)](https://github.com/vitejs/vite)
-[![UnoCSS](https://img.shields.io/badge/Uno_CSS-333333?style=for-the-badge&logo=unocss&logoColor=white)](https://github.com/unocss/unocss)
-
-Lyra uses Lux.jl for deep learning. Lux.jl licensed under the MIT License.  
 Lux.jl License : [https://github.com/LuxDL/Lux.jl/blob/main/LICENSE](https://github.com/LuxDL/Lux.jl/blob/main/LICENSE)
+<br>
 
-Lyra uses Genie.jl for Training-GUI Backend. Genie.jl licensed under the MIT License.
 Genie.jl License : [https://github.com/GenieFramework/Genie.jl/blob/main/LICENSE.md](https://github.com/GenieFramework/Genie.jl/blob/main/LICENSE.md)
-
-Lyra uses React, UnoCSS for Training-GUI Design. And uses Vite as build tool. React, UnoCSS & Vite licensed under the MIT License.
+<br>
 
 React License : [https://github.com/facebook/react/blob/main/LICENSE](https://github.com/facebook/react/blob/main/LICENSE)
 <br>
+
 UnoCSS License : [https://github.com/unocss/unocss/blob/main/LICENSE](https://github.com/unocss/unocss/blob/main/LICENSE)
 <br>
+
 Vite License : [https://github.com/vitejs/vite/blob/main/LICENSE](https://github.com/vitejs/vite/blob/main/LICENSE)
