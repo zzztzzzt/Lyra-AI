@@ -34,7 +34,7 @@ const BtnCopyCss: React.FC<Props> = ({ colorA, colorB, bgColor, btnText }) => {
         break;
 
       case "PandaCSS":
-        result = `css({ background: 'linear-gradient(90deg in oklch, ${cA}, ${cB})' })`;
+        result = `css({ background: 'linear-gradient(90deg in oklab, ${cA}, ${cB})' })`;
         break;
     }
 

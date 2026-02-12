@@ -18,21 +18,29 @@ export interface ColorData {
 const toStr = (col: OklchState) => `oklch(${(col.l * 100).toFixed(0)}% ${col.c.toFixed(3)} ${col.h})`;
 
 const getMidColor = (colorA: OklchState, colorB: OklchState): OklchState => {
-  let h1 = colorA.h;
-  let h2 = colorB.h;
+  // Convert OKLCH to OKLab (a, b)
+  const toRad = (deg: number) => (deg * Math.PI) / 180;
+  const toDeg = (rad: number) => (rad * 180) / Math.PI;
 
-  let diff = h2 - h1;
-  if (diff > 180) {
-    h2 -= 360;
-  } else if (diff < -180) {
-    h2 += 360;
-  }
+  const a1 = colorA.c * Math.cos(toRad(colorA.h));
+  const b1 = colorA.c * Math.sin(toRad(colorA.h));
+  
+  const a2 = colorB.c * Math.cos(toRad(colorB.h));
+  const b2 = colorB.c * Math.sin(toRad(colorB.h));
 
-  let hMid = (h1 + h2) / 2;
-  // Ensure the result returns to the positive range of 0-360
-  hMid = (hMid + 360) % 360;
+  // Linearly interpolate in OKLab space ( matches how CSS linear-gradient(in oklab, ...) )
+  const midL = (colorA.l + colorB.l) / 2;
+  const midA = (a1 + a2) / 2;
+  const midB = (b1 + b2) / 2;
 
-  return { l: (colorA.l + colorB.l) / 2, c: (colorA.c + colorB.c) / 2, h: hMid };
+  // Convert back to OKLCH
+  const midC = Math.sqrt(midA * midA + midB * midB);
+  let midH = toDeg(Math.atan2(midB, midA));
+  
+  // Normalize hue to the range [0, 360)
+  midH = (midH + 360) % 360;
+
+  return { l: midL, c: midC, h: midH };
 };
 
 function App() {
@@ -52,7 +60,7 @@ function App() {
   const accentM = useMemo(() => toStr(colorM), [colorM]);
   const accentA = useMemo(() => toStr(colorA), [colorA]);
   const accentB = useMemo(() => toStr(colorB), [colorB]);
-  const mainGradient = `linear-gradient(90deg in oklch, ${accentA}, ${accentB})`;
+  const mainGradient = `linear-gradient(90deg in oklab, ${accentA}, ${accentB})`;
   
   const midColor = useMemo(() => getMidColor(colorA, colorB), [colorA, colorB]);
   const accentMid = useMemo(() => toStr(midColor), [midColor]);
