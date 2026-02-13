@@ -19,6 +19,7 @@ JuliaLocalPreferences.toml
 /models/*
 !/models/Lyra1.0.jld2
 !/models/Lyra1.5.jld2
+!/models/Lyra1.6.jld2
 
 # Data & cache ( project specific )
 /data/

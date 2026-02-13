@@ -6,7 +6,7 @@ export
     train_from_file
 
 # 1. Hyperparameters
-const IN_DIM, OUT_DIM = 3, 27 # 3 Gradient Set × 3 Colors (3 Hex every set) × 3 Dimensions (LCH) = 27
+const IN_DIM, OUT_DIM = 3, 27 # Input : main color in OKLab (L, a, b). Output : relative OKLab offsets for 9 colors (3 gradient sets × 3 colors × 3 dims)
 const HIDDEN, BATCH_SIZE, N_EPOCHS, LR = 64, 16, 300, 1e-3
 
 function train_from_file(data_path::String, model_path::String)

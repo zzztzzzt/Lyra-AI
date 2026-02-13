@@ -25,7 +25,7 @@ const ShowcaseArea: React.FC<Props> = (({ gradient, midColor, accentM, accentA, 
 
           <div
             className='max-lg:mb-6 lg:ml-6 h-10 lg:h-1/2 w-1/3 max-lg:max-w-92 lg:w-1/9 xl:w-1/12 rounded-md'
-            style={{ backgroundImage: `linear-gradient(90deg in oklab, ${accentM}, white)` }}
+            style={{ backgroundImage: `linear-gradient(270deg in oklab, ${accentM}, white)` }}
           >
           </div>
         </>

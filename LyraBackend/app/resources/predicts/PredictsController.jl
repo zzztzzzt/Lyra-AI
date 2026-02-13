@@ -5,6 +5,9 @@ using Lux, JLD2
 
 using LyraUtils.ColorOKLab
 
+const BOLDNESS_MIN = 1.0f0
+const BOLDNESS_MAX = 1.25f0
+
 # After obtaining the path from ENV, check if the file exists
 const model_path = begin
     p1 = joinpath(ENV["ROOT_PARENT"], ENV["EXTERNAL_CUSTOM_AI_MODEL_PATH"])
@@ -30,6 +33,8 @@ function generate()
 
     raw_oklch = getpayload(:oklch, nothing)
     raw_hex   = getpayload(:hex, nothing)
+
+    boldness = rand(Float32) * (BOLDNESS_MAX - BOLDNESS_MIN) + BOLDNESS_MIN
 
     # 1) If oklch is provided, then oklch will be main
     if raw_oklch !== nothing
@@ -65,7 +70,7 @@ function generate()
             y_offset, _ = Lux.apply(tstate.model, x_matrix, tstate.parameters, tstate.states)
 
             # ADD BACK main color
-            y_pred = y_offset .+ repeat(x_matrix, 9)
+            y_pred = (boldness .* y_offset) .+ repeat(x_matrix, 9)
 
             # broken down into 9 colors (3 sets of gradients × 3 colors)
             colors_vec = reshape(vec(y_pred), 3, 9)
@@ -77,6 +82,7 @@ function generate()
             return json(Dict(
                 "status"         => "success",
                 "mode"           => "oklch",
+                "boldness"       => boldness,
                 "input_oklch"    => oklch_vec,
                 "palette_oklch"  => palette_oklch,
                 "palette_hex"    => palette_hex
@@ -103,7 +109,7 @@ function generate()
             y_offset, _ = Lux.apply(tstate.model, x_matrix, tstate.parameters, tstate.states)
 
             # ADD BACK main color
-            y_pred = y_offset .+ repeat(x_matrix, 9)
+            y_pred = (boldness .* y_offset) .+ repeat(x_matrix, 9)
 
             # broken down into 9 colors (3 sets of gradients × 3 colors)
             colors_vec = reshape(vec(y_pred), 3, 9)
@@ -114,6 +120,7 @@ function generate()
             return json(Dict(
                 "status"        => "success",
                 "mode"          => "hex",
+                "boldness"      => boldness,
                 "input_hex"     => input_hex,
                 "palette"       => results_hex,
                 "palette_oklch" => results_oklch
