@@ -10,3 +10,10 @@ public/js/genie/prism.js linguist-vendored
 public/js/genie/static.js linguist-vendored
 public/css/genie/style.css linguist-vendored
 public/css/genie/prism.css linguist-vendored
+
+bin/repl linguist-vendored
+bin/repl.bat linguist-vendored
+bin/runtask linguist-vendored
+bin/runtask.bat linguist-vendored
+bin/server linguist-vendored
+bin/server.bat linguist-vendored
