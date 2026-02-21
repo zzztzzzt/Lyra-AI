@@ -1,7 +1,8 @@
 import './App.css'
-import { useState, useMemo } from "react";
+import { useState, useMemo, type Dispatch, type SetStateAction } from "react";
 import MainColorArea from './MainColorArea';
 import GradientArea from './GradientArea';
+import MiddleColorArea from './MiddleColorArea';
 import ShowcaseArea from './ShowcaseArea';
 import ActionBarArea from './ActionBarArea';
 
@@ -48,6 +49,8 @@ function App() {
   const [colorM, setColorM] = useState<OklchState>({ l: 0.92, c: 0.141, h: 252 });
   const [colorA, setColorA] = useState<OklchState>({ l: 0.8, c: 0.186, h: 266 });
   const [colorB, setColorB] = useState<OklchState>({ l: 1, c: 0.06, h: 225 });
+  const [colorMidCustom, setColorMidCustom] = useState<OklchState>(getMidColor(colorA, colorB));
+  const [useCustomMid, setUseCustomMid] = useState<boolean>(false);
 
   // Derived State
   const mainColorLock = useMemo(() => {
@@ -63,7 +66,21 @@ function App() {
   const mainGradient = `linear-gradient(90deg in oklab, ${accentA}, ${accentB})`;
   
   const midColor = useMemo(() => getMidColor(colorA, colorB), [colorA, colorB]);
-  const accentMid = useMemo(() => toStr(midColor), [midColor]);
+  const activeMidColor = useMemo(() => (useCustomMid ? colorMidCustom : midColor), [useCustomMid, colorMidCustom, midColor]);
+  const accentMid = useMemo(() => toStr(activeMidColor), [activeMidColor]);
+
+  const setMidColorFromController: Dispatch<SetStateAction<OklchState>> = (next) => {
+    const resolved = typeof next === "function"
+      ? (next as (prev: OklchState) => OklchState)(useCustomMid ? colorMidCustom : midColor)
+      : next;
+
+    setColorMidCustom(resolved);
+    setUseCustomMid(true);
+  };
+
+  const backToDefaultMid = () => {
+    setUseCustomMid(false);
+  };
 
   return (
     <div className='lg:flex lg:flex-row-reverse'>
@@ -90,6 +107,19 @@ function App() {
           setColorB={setColorB}
           gradient={mainGradient}
         />
+
+        <MiddleColorArea
+          colorMid={activeMidColor}
+          setColorMid={setMidColorFromController}
+          accentMid={accentMid}
+          accentM={accentM}
+          useCustomMid={useCustomMid}
+          onBackToDefault={backToDefaultMid}
+        />
+
+        <div className='mb-6 text-center text-3xl lg:text-2.5xl'>
+          <span className='text-transparent bg-clip-text' style={{ backgroundImage: mainGradient }}>middle color area</span>
+        </div>
       </div>
       <div className='relative w-full max-lg:max-w-100 lg:h-screen max-lg:mx-auto'>
         <ShowcaseArea
