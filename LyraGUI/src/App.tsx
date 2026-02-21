@@ -63,11 +63,12 @@ function App() {
   const accentM = useMemo(() => toStr(colorM), [colorM]);
   const accentA = useMemo(() => toStr(colorA), [colorA]);
   const accentB = useMemo(() => toStr(colorB), [colorB]);
-  const mainGradient = `linear-gradient(90deg in oklab, ${accentA}, ${accentB})`;
   
   const midColor = useMemo(() => getMidColor(colorA, colorB), [colorA, colorB]);
   const activeMidColor = useMemo(() => (useCustomMid ? colorMidCustom : midColor), [useCustomMid, colorMidCustom, midColor]);
   const accentMid = useMemo(() => toStr(activeMidColor), [activeMidColor]);
+  
+  const mainGradient = `linear-gradient(90deg in oklab, ${accentA} 0%, ${accentMid} 50%, ${accentB} 100%)`;
 
   const setMidColorFromController: Dispatch<SetStateAction<OklchState>> = (next) => {
     const resolved = typeof next === "function"
