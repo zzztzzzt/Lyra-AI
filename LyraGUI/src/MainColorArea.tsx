@@ -28,7 +28,7 @@ const MainColorArea: React.FC<Props> = ({ colorM, setColorM, accentM, mainColorL
                     
                     <div className='absolute inset-0 flex items-center justify-center cursor-not-allowed'>
                         <div className='backdrop-blur-md px-8 py-5 shadow-xl flex items-center gap-4 bg-white/20'>
-                            <span className='text-lg'>Main Color is locked. Please add to 7 colors first ( Main Color + 3 Gradient Pairs )</span>
+                            <span className='text-lg'>Main Color is locked. Please add to 10 colors first ( Main Color + 3 Three-color Gradients )</span>
                         </div>
                     </div>
                 </div>

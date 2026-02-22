@@ -57,7 +57,7 @@ function App() {
     const lastPalette = colorData.palettes[colorData.palettes.length - 1];
     const currentCount = lastPalette ? lastPalette.length : 0;
 
-    return currentCount > 0 && currentCount < 7;
+    return currentCount > 0 && currentCount < 10;
   }, [colorData]);
 
   const accentM = useMemo(() => toStr(colorM), [colorM]);
@@ -135,6 +135,7 @@ function App() {
           gradient={mainGradient}
           colorA={colorA}
           colorB={colorB}
+          colorMid={activeMidColor}
           colorM={colorM}
           accentM={accentM}
           colorData={colorData}
@@ -146,3 +147,4 @@ function App() {
 }
 
 export default App
+

@@ -9,11 +9,12 @@ interface Props {
   setColorData: React.Dispatch<React.SetStateAction<ColorData>>;
   colorA: OklchState;
   colorB: OklchState;
+  colorMid: OklchState;
   colorM: OklchState;
   btnText: string;
 }
 
-const GradientBtnBasic: React.FC<Props> = ({ gradient, colorData, setColorData, colorA, colorB, colorM, btnText }) => {
+const GradientBtnBasic: React.FC<Props> = ({ gradient, colorData, setColorData, colorA, colorB, colorMid, colorM, btnText }) => {
   const [isTraining, setIsTraining] = useState(false);
   const [trainMessage, setTrainMessage] = useState("Train");
 
@@ -21,18 +22,27 @@ const GradientBtnBasic: React.FC<Props> = ({ gradient, colorData, setColorData, 
     setColorData(prev => {
       const lastPalette = prev.palettes[prev.palettes.length - 1];
       const currentCount = lastPalette ? lastPalette.length : 0;
-      const isNewPalette = currentCount === 0 || currentCount === 7;
+      const isNewPalette = currentCount === 0 || currentCount === 10;
       
       let newColors: number[][] = [];
       
       if (isNewPalette) {
-        newColors = [ [colorM.l, colorM.c, colorM.h], [colorA.l, colorA.c, colorA.h], [colorB.l, colorB.c, colorB.h] ];
+        newColors = [
+          [colorM.l, colorM.c, colorM.h],
+          [colorA.l, colorA.c, colorA.h],
+          [colorMid.l, colorMid.c, colorMid.h],
+          [colorB.l, colorB.c, colorB.h]
+        ];
         return {
           ...prev,
           palettes: [...prev.palettes, newColors]
         };
       } else {
-        newColors = [ [colorA.l, colorA.c, colorA.h], [colorB.l, colorB.c, colorB.h] ];
+        newColors = [
+          [colorA.l, colorA.c, colorA.h],
+          [colorMid.l, colorMid.c, colorMid.h],
+          [colorB.l, colorB.c, colorB.h]
+        ];
         const updatedPalette = [...lastPalette, ...newColors];
         return {
           ...prev,
@@ -48,16 +58,16 @@ const GradientBtnBasic: React.FC<Props> = ({ gradient, colorData, setColorData, 
 
       const lastPalette = prev.palettes[prev.palettes.length - 1];
       
-      // 3 colors, delete whole arr
-      if (lastPalette.length <= 3) {
+      // 4 colors, delete whole arr
+      if (lastPalette.length <= 4) {
         return {
           ...prev,
           palettes: prev.palettes.slice(0, -1)
         };
       } 
 
-      // More than 3 colors, delete the last 2
-      const updatedPalette = lastPalette.slice(0, -2);
+      // More than 4 colors, delete the last 3
+      const updatedPalette = lastPalette.slice(0, -3);
       return {
         ...prev,
         palettes: [...prev.palettes.slice(0, -1), updatedPalette]
