@@ -23,7 +23,7 @@ const MiddleColorArea: React.FC<Props> = ({
     return(
         <div className='relative'>
             <div
-              className='flex flex-col items-center pt-2 pb-8 px-5 lg:px-10 border-t-solid border-2'
+              className='flex flex-col items-center pt-2 pb-6 px-5 lg:px-10 border-t-solid border-2'
               style={{ borderColor: accentM }}
             >
                 <button

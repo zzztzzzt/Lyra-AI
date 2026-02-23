@@ -41,7 +41,11 @@ const getMidColor = (colorA: OklchState, colorB: OklchState): OklchState => {
   // Normalize hue to the range [0, 360)
   midH = (midH + 360) % 360;
 
-  return { l: midL, c: midC, h: midH };
+  return {
+    l: Math.round(midL * 100) / 100,
+    c: Math.round(midC * 1000) / 1000,
+    h: Math.round(midH)
+  };
 };
 
 function App() {
