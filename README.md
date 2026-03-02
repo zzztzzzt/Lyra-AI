@@ -31,11 +31,11 @@ Lyra uses React, UnoCSS for Training-GUI Design. And uses Vite as build tool. Re
 
 ## How To Train
 
-1. Install Julia : [https://julialang.org/](https://julialang.org/)
+#### 1. Install Julia : [https://julialang.org/](https://julialang.org/)
 
-2. Download or git clone this project
+#### 2. Download or git clone this project
 
-3. cd project root & run below : 
+#### 3. cd project root & run below : 
 
 `julia`
 
@@ -51,17 +51,17 @@ and press `backspace` to close pkg mode
 
 press `Ctrl + D` to close Julia REPL
 
-4. Start training, here are 3 different ways : 
+#### 4. Start training, here are 3 different ways : 
 
 ### Option 1. Training via GUI ( Recommended )
 
 ![GUI-01](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/gui-01.webp)
 
-### ( You can change training mode ( Palette or Gradient ) to fit your color-set style )
+#### ( You can change training mode ( Palette or Gradient ) to fit your color-set style )
 
 ![GUI-02](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/gui-02.webp)
 
-1. Let your CLI / shell go into folder `/LyraBackend/`. And run below : 
+#### 1. Let your CLI / shell go into folder `/LyraBackend/`. And run below : 
 
 `( Genie Backend is in different environment, so even you already ran below command at project root, you still need to run it again here. )`
 
@@ -89,9 +89,9 @@ press `backspace`
 
 and then your backend app is running now
 
-2. Download Node.js : [https://nodejs.org/](https://nodejs.org/)
+#### 2. Download Node.js : [https://nodejs.org/](https://nodejs.org/)
 
-3. Open another CLI / shell, go into project root folder, then go into folder `/LyraGUI/`. And run below : 
+#### 3. Open another CLI / shell, go into project root folder, then go into folder `/LyraGUI/`. And run below : 
 
 `npm install`
 
@@ -107,14 +107,14 @@ modify `training_data_example_oklch.json` at project root
 
 JSON fromat example is at below, here are 2 ways to build dataset : 
 
-1. OKLCH
+#### 1. OKLCH
 
 ```json
 
 {
     "palettes": [
-        [[0.92,0.141,252],[0.8,0.186,266],[1,0.06,225],[0.8,0.186,266],[1,0.131,225],[0.8,0.125,248],[1,0.131,225]],
-        [[0.92,0.141,154],[0.92,0.131,164],[0.89,0.148,192],[0.92,0.131,164],[0.89,0.148,145],[0.92,0.192,194],[0.89,0.148,145]]
+        [[0.92,0.141,252],[0.8,0.186,266],[0.9,0.117,256],[1,0.06,225],[0.8,0.186,266],[0.92,0.08,203],[1,0.079,153],[0.8,0.186,266],[0.91,0.096,242],[1,0.079,168]],
+        [[0.92,0.141,276],[0.8,0.186,290],[0.94,0.067,265],[1,0.079,168],[0.8,0.186,290],[0.92,0.104,268],[1,0.079,204],[0.8,0.186,290],[0.95,0.211,279],[1,0.079,264]]
     ]
 }
 
@@ -126,7 +126,7 @@ in project folder, command below
 
 OR
 
-2. HEX
+#### 2. HEX ( Legacy )
 
 ```json
 
@@ -175,7 +175,9 @@ run `julia --project=. scripts/predict.jl` to test
 
 ## Project Detail / Debug
 
-1. Now /src/ folder have 2 customized pkg ( `LyraUtils` & `LyraDataTrain` ). To add new pkg, you need to run below at /src/ : 
+### Add Custom pkg :
+
+Now /src/ folder have 2 customized pkg ( `LyraUtils` & `LyraDataTrain` ). To add new pkg, you need to run below at /src/ : 
 
 `julia`
 
@@ -183,7 +185,9 @@ run `julia --project=. scripts/predict.jl` to test
 
 ( all your jl codes needs to be `module` type )
 
-2. If you add any new dependencies into your customized pkg's `project.toml`, you need to run below command on `every environment` which is using your customized pkg ( or it won't auto update )
+### If your Custom pkg has new Dependencies :
+
+If you add any new dependencies into your customized pkg's `project.toml`, you need to run below command on `every environment` which is using your customized pkg ( or it won't auto update )
 
 `julia`
 
@@ -191,7 +195,9 @@ run `julia --project=. scripts/predict.jl` to test
 
 `dev src/YourNewPkgName`
 
-3. If your pkg problems still exist, try below command too : 
+### Resolve pkg problems :
+
+If your pkg problems still exist, try below command too : 
 
 ( it will check the package dependencies )
 
@@ -201,7 +207,9 @@ run `julia --project=. scripts/predict.jl` to test
 
 `resolve`
 
-4. At LyraBackend ( Genie.jl ), if you want to create new Controller & resource, run below at /LyraBackend/ : 
+### Add new Controller & resource to Genie
+
+At LyraBackend ( Genie.jl ), if you want to create new Controller & resource, run below at /LyraBackend/ : 
 
 `julia --project=.`
 
