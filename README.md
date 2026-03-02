@@ -173,6 +173,14 @@ your model will be saved in `models/trained_color_model.jld2`
 
 run `julia --project=. scripts/predict.jl` to test
 
+## Inspect Lyra Model Structure
+
+Show Lyra Model Structure for AI Model Coversion, run below :
+
+```shell
+julia --project=. scripts/inspect_lyra_jld2.jl models/YourModel.jld2
+```
+
 ## Project Detail / Debug
 
 ### Add Custom pkg :
@@ -193,7 +201,7 @@ If you add any new dependencies into your customized pkg's `project.toml`, you n
 
 `] activate .`
 
-`dev src/YourNewPkgName`
+`dev path/to/project_root/src/YourNewPkgName`
 
 ### Resolve pkg problems :
 
@@ -207,9 +215,9 @@ If your pkg problems still exist, try below command too :
 
 `resolve`
 
-### Add new Controller & resource to Genie
+### Add new Controller & Resource to Genie
 
-At LyraBackend ( Genie.jl ), if you want to create new Controller & resource, run below at /LyraBackend/ : 
+At LyraBackend ( Genie.jl ), if you want to create new Controller & Resource, run below at /LyraBackend/ : 
 
 `julia --project=.`
 
