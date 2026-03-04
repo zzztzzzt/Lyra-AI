@@ -175,7 +175,7 @@ run `julia --project=. scripts/predict.jl` to test
 
 ## Inspect Lyra Model Structure
 
-Show Lyra Model Structure for AI Model Coversion, run below :
+To show Lyra Model Structure for AI Model Conversion, run below :
 
 ```shell
 julia --project=. scripts/inspect_lyra_jld2.jl models/YourModel.jld2
