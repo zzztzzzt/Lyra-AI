@@ -91,6 +91,10 @@ function train_from_file(data_path::String, model_path::String)
 
     # 4. Training
     println("Training Started ( using mish + L1+L2 loss + val set )")
+
+    avg_train_loss = 0f0
+    avg_val_loss = 0f0
+
     for epoch in 1:N_EPOCHS
         total_train_loss = 0.0f0
         n_train_batches = 0
