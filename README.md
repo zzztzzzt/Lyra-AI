@@ -1,4 +1,4 @@
-# Lyra
+# Lyra-Core
 
 [![Hugging Face Model](https://img.shields.io/badge/-HuggingFace-3B4252?style=flat&logo=huggingface&logoColor=)](https://huggingface.co/zzztzzzt)
 [![GitHub last commit](https://img.shields.io/github/last-commit/zzztzzzt/Lyra-AI.svg)](https://github.com/zzztzzzt/Lyra-AI)
