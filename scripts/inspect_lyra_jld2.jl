@@ -68,11 +68,16 @@ function inspect_file(model_path::String)
     println(model_path)
     println()
 
+    #=
+    The commented parts are usually not needed
+    And will contain large blocks of text
+    Uncomment them if you need them
+    =#
     println("⭐ ||||||  tstate  |||||| ⭐")
-    println("type: ", typeof(tstate))
-    println("fields: ", collect(fieldnames(typeof(tstate))))
+    #println("type: ", typeof(tstate))
+    #println("fields: ", collect(fieldnames(typeof(tstate))))
     if hasproperty(tstate, :model)
-        println("model type: ", typeof(getproperty(tstate, :model)))
+        #println("model type: ", typeof(getproperty(tstate, :model)))
     end
     if hasproperty(tstate, :parameters)
         println("parameters type: ", typeof(getproperty(tstate, :parameters)))
