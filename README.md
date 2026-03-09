@@ -8,7 +8,7 @@
 
 <img src="https://github.com/zzztzzzt/Lyra-AI/blob/main/logo/favicon.png" alt="lyra-logo" style="height: 280px; width: auto;" />
 
-### Lyra is an AI for orchestrating colors/gradients in 3D environments.
+### Lyra : AI for color orchestrating / color harmony.
 
 IMPORTANT : This project is still in the development and testing stages, licensing terms may be updated in the future. Please don't do any commercial usage currently.
 
