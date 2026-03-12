@@ -6,7 +6,9 @@ using Lux, JLD2
 using LyraUtils.ColorOKLab
 
 const BOLDNESS_MIN = 1.0f0
-const BOLDNESS_MAX = 1.25f0
+#const BOLDNESS_MAX = 1.25f0
+# make the stable prediction first, now only set boldness value to 1.0
+const BOLDNESS_MAX = 1.0f0
 
 # After obtaining the path from ENV, check if the file exists
 const model_path = begin
@@ -113,7 +115,7 @@ function generate()
 
             # broken down into 9 colors (3 sets of gradients × 3 colors)
             colors_vec = reshape(vec(y_pred), 3, 9)
-            
+
             results_hex = [oklab_to_hex(colors_vec[:, i]) for i in 1:9]
             results_oklch = [oklab_to_oklch_vec(colors_vec[:, i]) for i in 1:9]
 

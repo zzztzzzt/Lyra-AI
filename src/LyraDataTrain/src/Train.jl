@@ -12,6 +12,10 @@ const TRAIN_RATIO = 0.8
 # L1 + L2 mixed weights
 const L1_WEIGHT = 0.7f0
 const L2_WEIGHT = 0.3f0
+# Encourage the 3 gradient groups ( 9 dims each ) to differ, avoid bland similar outputs
+const DIVERSITY_WEIGHT = 0.03f0
+const TAIL_SEP_WEIGHT = 0.10f0
+const TAIL_SEP_MARGIN = 0.15f0
 
 function train_from_file(data_path::String, model_path::String)
     # 2. Load Data
@@ -107,8 +111,27 @@ function train_from_file(data_path::String, model_path::String)
                     diff = pred .- d[2]
                     l1 = mean(abs, diff)
                     l2 = mean(diff .^ 2f0)
-                    l = L1_WEIGHT * l1 + L2_WEIGHT * l2
-                    return (l, st_new, ()) # loss, new state, empty stats
+                    recon = L1_WEIGHT * l1 + L2_WEIGHT * l2
+                    # Diversity: variance between the 3 gradient groups (indices 1:9, 10:18, 19:27)
+                    g1 = pred[1:9, :]
+                    g2 = pred[10:18, :]
+                    g3 = pred[19:27, :]
+                    mean_g = (g1 .+ g2 .+ g3) ./ 3f0
+                    div_raw = mean(sum((g1 .- mean_g).^2f0, dims=1) .+ sum((g2 .- mean_g).^2f0, dims=1) .+ sum((g3 .- mean_g).^2f0, dims=1))
+                    # Normalize to avoid unbounded growth
+                    div_term = div_raw / (mean(abs, pred) + 1.0f-4)
+                    # Tail separation: colors #3, #6, #9 (end of each gradient)
+                    t1 = pred[7:9, :]
+                    t2 = pred[16:18, :]
+                    t3 = pred[25:27, :]
+                    d12 = sqrt.(sum((t1 .- t2).^2f0, dims=1) .+ 1.0f-6)
+                    d13 = sqrt.(sum((t1 .- t3).^2f0, dims=1) .+ 1.0f-6)
+                    d23 = sqrt.(sum((t2 .- t3).^2f0, dims=1) .+ 1.0f-6)
+                    tail_sep = mean(NNlib.relu.(TAIL_SEP_MARGIN .- d12) .+
+                                    NNlib.relu.(TAIL_SEP_MARGIN .- d13) .+
+                                    NNlib.relu.(TAIL_SEP_MARGIN .- d23))
+                    l = recon + DIVERSITY_WEIGHT * div_term + TAIL_SEP_WEIGHT * tail_sep
+                    return (l, st_new, ())
                 end,
                 (x_batch, y_batch),
                 tstate
@@ -127,8 +150,24 @@ function train_from_file(data_path::String, model_path::String)
             diff = pred .- y_valb
             l1 = mean(abs, diff)
             l2 = mean(diff .^ 2f0)
-            l = L1_WEIGHT * l1 + L2_WEIGHT * l2
-            val_loss_sum += l * size(x_valb, 2) # weighted by batch size
+            recon = L1_WEIGHT * l1 + L2_WEIGHT * l2
+            g1 = pred[1:9, :]
+            g2 = pred[10:18, :]
+            g3 = pred[19:27, :]
+            mean_g = (g1 .+ g2 .+ g3) ./ 3f0
+            div_raw = mean(sum((g1 .- mean_g).^2f0, dims=1) .+ sum((g2 .- mean_g).^2f0, dims=1) .+ sum((g3 .- mean_g).^2f0, dims=1))
+            div_term = div_raw / (mean(abs, pred) + 1.0f-4)
+            t1 = pred[7:9, :]
+            t2 = pred[16:18, :]
+            t3 = pred[25:27, :]
+            d12 = sqrt.(sum((t1 .- t2).^2f0, dims=1) .+ 1.0f-6)
+            d13 = sqrt.(sum((t1 .- t3).^2f0, dims=1) .+ 1.0f-6)
+            d23 = sqrt.(sum((t2 .- t3).^2f0, dims=1) .+ 1.0f-6)
+            tail_sep = mean(NNlib.relu.(TAIL_SEP_MARGIN .- d12) .+
+                            NNlib.relu.(TAIL_SEP_MARGIN .- d13) .+
+                            NNlib.relu.(TAIL_SEP_MARGIN .- d23))
+            l = recon + DIVERSITY_WEIGHT * div_term + TAIL_SEP_WEIGHT * tail_sep
+            val_loss_sum += l * size(x_valb, 2)
             val_n_samples += size(x_valb, 2)
         end
         avg_val_loss = val_loss_sum / val_n_samples
