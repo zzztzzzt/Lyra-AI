@@ -227,6 +227,12 @@ At LyraBackend ( Genie.jl ), if you want to create new Controller & Resource, ru
 
 ## Version History ( Training Process & Predictions )
 
+#### Lyra 2.5 (2026.03) - Predictions
+![2.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra2.5_predictions.png)
+
+#### Lyra 2.5 (2026.03) - Training Process
+![2.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra2.5_training_process.webp)
+
 #### Lyra 1.5 (2026.02) - Predictions
 ![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.5_predictions.png)
 
