@@ -29,6 +29,8 @@ Lyra uses Genie.jl for Training-GUI Backend. Genie.jl licensed under the MIT Lic
 
 Lyra uses React, UnoCSS for Training-GUI Design. And uses Vite as build tool. React, UnoCSS & Vite licensed under the MIT License.
 
+![main](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/main-01.png)
+
 ## How To Train
 
 #### 1. Install Julia : [https://julialang.org/](https://julialang.org/)
