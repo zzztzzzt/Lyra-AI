@@ -31,6 +31,10 @@ Lyra uses React, UnoCSS for Training-GUI Design. And uses Vite as build tool. Re
 
 ![main](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/main-01.png)
 
+**( Lyra 2.5 - Predictions )**
+
+![2.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra2.5_predictions.png)
+
 ## How To Train
 
 #### 1. Install Julia : [https://julialang.org/](https://julialang.org/)
