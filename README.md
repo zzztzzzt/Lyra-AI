@@ -6,7 +6,7 @@
 
 <br>
 
-<img src="https://github.com/zzztzzzt/Lyra-AI/blob/main/logo/favicon.png" alt="lyra-logo" style="height: 280px; width: auto;" />
+<img src="https://github.com/zzztzzzt/Lyra-AI/blob/main/logo/logo.png" alt="lyra-logo" style="height: 280px; width: auto;" />
 
 ### Lyra - AI for color orchestrating / color harmony.
 
