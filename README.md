@@ -35,6 +35,32 @@ Lyra uses React, UnoCSS for Training-GUI Design. And uses Vite as build tool. Re
 
 ![2.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra2.5_predictions.png)
 
+## How It Works
+
+### 1. Gradient Definition
+
+the training system uses 3 colors to make 1 gradient.
+color-start + color-mid + color-end.
+
+GUI uses **OKLCH** to define color.
+GUI uses **OKLAB** to present gradients.
+Training Systen uses **OKLAB** for training.
+
+### 2. Training Data Preparing
+
+the data structure : Main Color + 3 Gradients ( start + mid + end ).
+total : 1 + 3 x 3 = 10 colors.
+
+AI will learn the **offset** between Main Color & Other Colors.
+so the actual training data : Main Color + 9 Offsets.
+
+### 3. Training Process
+
+use **Mish** activation function to make continuous gradient color changes.
+mix L1 & L2.
+
+Increase the penalty to force the model to avoid producing overly similar gradient colors.
+
 ## How To Train
 
 #### 1. Install Julia : [https://julialang.org/](https://julialang.org/)
@@ -230,26 +256,6 @@ At LyraBackend ( Genie.jl ), if you want to create new Controller & Resource, ru
 `using Genie`
 
 `Genie.Generator.newresource("TheName")`
-
-## Version History ( Training Process & Predictions )
-
-#### Lyra 2.5 (2026.03) - Predictions
-![2.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra2.5_predictions.png)
-
-#### Lyra 2.5 (2026.03) - Training Process
-![2.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra2.5_training_process.webp)
-
-#### Lyra 1.5 (2026.02) - Predictions
-![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.5_predictions.png)
-
-#### Lyra 1.5 (2026.02) - Training Process
-![1.5showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.5_training_process.webp)
-
-#### Lyra 1.0 (2026.01) - Predictions
-![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.0_predictions.jpg)
-
-#### Lyra 1.0 (2026.01) - Training Process
-![1.0showcase](https://github.com/zzztzzzt/Lyra-AI/blob/main/training_showcase/Lyra1.0_training_process.webp)
 
 ## Project Dependencies Details
 
