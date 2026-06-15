@@ -67,9 +67,53 @@ Increase the penalty to force the model to avoid producing overly similar gradie
 
 #### 1. Install Julia : [https://julialang.org/](https://julialang.org/)
 
-#### 2. Download or git clone this project
+#### 2. Install PostgreSQL : [https://www.postgresql.org/](https://www.postgresql.org/)
 
-#### 3. cd project root & run below : 
+create user for Lyra Project :
+
+on CMD, command below :
+
+```shell
+psql -U postgres
+```
+
+```sql
+CREATE USER lyra_user WITH PASSWORD 'your_password';
+```
+
+```sql
+CREATE DATABASE lyra_development OWNER lyra_user;
+```
+
+```sql
+GRANT ALL PRIVILEGES ON DATABASE lyra_development TO lyra_user;
+```
+
+```sql
+\q
+```
+
+#### 3. Download or git clone this project
+
+#### 4. add Database Secret
+
+create `/LyraBackend/db/connection.yml`
+
+add like below :
+
+```yaml
+env: "dev"
+
+dev:
+  adapter: PostgreSQL
+  host: "127.0.0.1"
+  port: "5432"
+  database: "xxx"
+  username: "xxx"
+  password: "xxx"
+```
+
+#### 5. cd project root & run below : 
 
 `julia`
 
@@ -85,7 +129,37 @@ and press `backspace` to close pkg mode
 
 press `Ctrl + D` to close Julia REPL
 
-#### 4. Start training, here are 3 different ways : 
+#### 6. Database Migration
+
+cd into `\LyraBackend`
+
+command : `julia` => `]` => `activate .` => press `backspace`
+
+and then run below :
+
+```shell
+using SearchLight, SearchLight.Migrations, SearchLightPostgreSQL
+```
+
+```shell
+SearchLight.Configuration.load("db/connection.yml")
+```
+
+```shell
+SearchLight.connect()
+```
+
+```shell
+SearchLight.Migrations.init()
+```
+
+```shell
+SearchLight.Migrations.up()
+```
+
+press `Ctrl + D` to close Julia REPL
+
+#### 7. Start training, here are 3 different ways : 
 
 ### Option 1. Training via GUI ( Recommended )
 
@@ -258,6 +332,12 @@ At LyraBackend ( Genie.jl ), if you want to create new Controller & Resource, ru
 `using Genie`
 
 `Genie.Generator.newresource("TheName")`
+
+### Add new Database Migration via SearchLight
+
+`using SearchLight, SearchLight.Migrations, SearchLightPostgreSQL`
+
+`SearchLight.Generator.newmigration("xxx")` ( For example, xxx can be `"CreatePaletteBatchesAndPalettes"` )
 
 ## Project Dependencies Details
 

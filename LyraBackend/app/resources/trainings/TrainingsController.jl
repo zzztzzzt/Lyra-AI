@@ -3,6 +3,9 @@ module TrainingsController
 using Genie.Renderer.Json, Genie.Requests
 using JSON
 
+include("PaletteStore.jl")
+using .PaletteStore
+
 using LyraDataTrain.PaletteProcessorJson
 using LyraDataTrain.Train
 
@@ -27,7 +30,14 @@ function process_palettes()
     end
     
     dataset_output_file = joinpath(ENV["ROOT_PARENT"], ENV["EXTERNAL_TRAINING_DATA_PATH"])
-    
+
+    # Persist raw palette data to PostgreSQL (non-fatal: training continues even if DB is unavailable)
+    try
+      store_palette_batch(payload)
+    catch db_err
+      @warn "[PaletteStore] Failed to store batch in PostgreSQL, continuing with training" exception=(db_err, catch_backtrace())
+    end
+
     process_json_palettes(payload, dataset_output_file, true)
 
     model_saving_path = joinpath(ENV["ROOT_PARENT"], ENV["EXTERNAL_CUSTOM_AI_MODEL_PATH"])
