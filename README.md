@@ -335,6 +335,10 @@ At LyraBackend ( Genie.jl ), if you want to create new Controller & Resource, ru
 
 ### Add new Database Migration via SearchLight
 
+go to `/LyraBackend`
+
+`julia --project=.`
+
 `using SearchLight, SearchLight.Migrations, SearchLightPostgreSQL`
 
 `SearchLight.Generator.newmigration("xxx")` ( For example, xxx can be `"CreatePaletteBatchesAndPalettes"` )
